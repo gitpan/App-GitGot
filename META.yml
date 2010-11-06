@@ -1,0 +1,185 @@
+---
+abstract: 'A tool to make it easier to manage multiple git repositories.'
+author:
+  - 'John SJ Anderson <genehack@genehack.org>'
+build_requires:
+  English: 0
+  Test::More: 0
+configure_requires:
+  ExtUtils::MakeMaker: 6.31
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.102342, CPAN::Meta::Converter version 2.102400'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: App-GitGot
+requires:
+  Capture::Tiny: 0
+  Config::INI::Reader: 0
+  Cwd: 0
+  FindBin: 0
+  List::MoreUtils: 0
+  Moose: 0
+  MooseX::App::Cmd: 0
+  MooseX::App::Cmd::Command: 0
+  Net::GitHub::V2::Repositories: 0
+  Storable: 0
+  Term::ReadLine: 0
+  Term::ReadLine::Perl: 0
+  Try::Tiny: 0
+  YAML: 0
+  autodie: 0
+  namespace::autoclean: 0
+  perl: 5.010
+  version: 0
+resources:
+  repository: https://github.com/genehack/app-gitgot.git
+version: 0.1
+x_Dist_Zilla:
+  plugins:
+    -
+      class: Dist::Zilla::Plugin::Git::Check
+      name: '@GENEHACK/@Git/Check'
+      version: 1.102810
+    -
+      class: Dist::Zilla::Plugin::Git::Commit
+      name: '@GENEHACK/@Git/Commit'
+      version: 1.102810
+    -
+      class: Dist::Zilla::Plugin::Git::Tag
+      name: '@GENEHACK/@Git/Tag'
+      version: 1.102810
+    -
+      class: Dist::Zilla::Plugin::Git::Push
+      name: '@GENEHACK/@Git/Push'
+      version: 1.102810
+    -
+      class: Dist::Zilla::Plugin::Git::NextVersion
+      name: '@GENEHACK/Git::NextVersion'
+      version: 1.102810
+    -
+      class: Dist::Zilla::Plugin::GatherDir
+      name: '@GENEHACK/@Basic/GatherDir'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::PruneCruft
+      name: '@GENEHACK/@Basic/PruneCruft'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::ManifestSkip
+      name: '@GENEHACK/@Basic/ManifestSkip'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::MetaYAML
+      name: '@GENEHACK/@Basic/MetaYAML'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::License
+      name: '@GENEHACK/@Basic/License'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::Readme
+      name: '@GENEHACK/@Basic/Readme'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::ExtraTests
+      name: '@GENEHACK/@Basic/ExtraTests'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::ExecDir
+      name: '@GENEHACK/@Basic/ExecDir'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::ShareDir
+      name: '@GENEHACK/@Basic/ShareDir'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::MakeMaker
+      name: '@GENEHACK/@Basic/MakeMaker'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::Manifest
+      name: '@GENEHACK/@Basic/Manifest'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::TestRelease
+      name: '@GENEHACK/@Basic/TestRelease'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::ConfirmRelease
+      name: '@GENEHACK/@Basic/ConfirmRelease'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::UploadToCPAN
+      name: '@GENEHACK/@Basic/UploadToCPAN'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::AutoPrereqs
+      name: '@GENEHACK/AutoPrereqs'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::CriticTests
+      name: '@GENEHACK/CriticTests'
+      version: 1.102280
+    -
+      class: Dist::Zilla::Plugin::ExtraTests
+      name: '@GENEHACK/ExtraTests'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::MetaConfig
+      name: '@GENEHACK/MetaConfig'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::MetaJSON
+      name: '@GENEHACK/MetaJSON'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::PodCoverageTests
+      name: '@GENEHACK/PodCoverageTests'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::PodSyntaxTests
+      name: '@GENEHACK/PodSyntaxTests'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::PodWeaver
+      name: '@GENEHACK/PodWeaver'
+      version: 3.101641
+    -
+      class: Dist::Zilla::Plugin::Repository
+      name: '@GENEHACK/Repository'
+      version: 0.15
+    -
+      class: Dist::Zilla::Plugin::MetaResources
+      name: MetaResources
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::Prereqs
+      config:
+        Dist::Zilla::Plugin::Prereqs:
+          phase: runtime
+          type: requires
+      name: Prereqs
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::FinderCode
+      name: ':InstallModules'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::FinderCode
+      name: ':TestFiles'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::FinderCode
+      name: ':ExecFiles'
+      version: 4.102342
+    -
+      class: Dist::Zilla::Plugin::FinderCode
+      name: ':ShareFiles'
+      version: 4.102342
+  zilla:
+    class: Dist::Zilla::Dist::Builder
+    config:
+      is_trial: 1
+    version: 4.102342
