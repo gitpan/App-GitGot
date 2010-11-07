@@ -1,8 +1,29 @@
 Revision History for App-GitGot
 ===============================
 
-0.2
+0.3
 ---
+
+commit d0cc3f66e3fd00bf22db41d7cfb7e93ef4824dbe
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Sun Nov 7 10:20:06 2010 -0500
+
+    remove bogus VERSION info
+
+commit b588853d616f9d4dd3c272858b071a8f32f3162e
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Sun Nov 7 10:19:55 2010 -0500
+
+    release
+
+commit be8cda8f1a2e322d215712623541c70242526ffa
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Sun Nov 7 10:19:45 2010 -0500
+
+    don't ignore released dists
+
+v0.2 2010-11-07
+---------------
 
 commit 5583a1f9380666ae7b57145384d9054416210024
 Author: John SJ Anderson <genehack@genehack.org>

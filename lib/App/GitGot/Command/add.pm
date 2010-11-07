@@ -1,6 +1,6 @@
 package App::GitGot::Command::add;
 BEGIN {
-  $App::GitGot::Command::add::VERSION = '0.2';
+  $App::GitGot::Command::add::VERSION = '0.3';
 }
 BEGIN {
   $App::GitGot::Command::add::AUTHORITY = 'cpan:GENEHACK';
@@ -114,7 +114,7 @@ App::GitGot::Command::add - add a new repo to your config
 
 =head1 VERSION
 
-version 0.2
+version 0.3
 
 =head1 AUTHOR
 

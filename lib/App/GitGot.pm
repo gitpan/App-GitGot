@@ -1,5 +1,8 @@
 package App::GitGot;
 BEGIN {
+  $App::GitGot::VERSION = '0.3';
+}
+BEGIN {
   $App::GitGot::AUTHORITY = 'cpan:GENEHACK';
 }
 use Moose;
@@ -7,7 +10,6 @@ extends 'MooseX::App::Cmd';
 # ABSTRACT: A tool to make it easier to manage multiple git repositories.
 
 
-use version; our $VERSION = qv("v0.01");
 1;
 
 __END__
@@ -19,7 +21,7 @@ App::GitGot - A tool to make it easier to manage multiple git repositories.
 
 =head1 VERSION
 
-version 0.2
+version 0.3
 
 =head1 SYNOPSIS
 

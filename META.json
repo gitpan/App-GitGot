@@ -37,8 +37,7 @@
             "YAML" : 0,
             "autodie" : 0,
             "namespace::autoclean" : 0,
-            "perl" : "5.010",
-            "version" : 0
+            "perl" : "5.010"
          }
       },
       "test" : {
@@ -62,7 +61,7 @@
          "web" : "http://github.com/genehack/app-gitgot"
       }
    },
-   "version" : "0.2",
+   "version" : "0.3",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
