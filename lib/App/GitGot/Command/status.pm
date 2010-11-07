@@ -1,4 +1,10 @@
 package App::GitGot::Command::status;
+BEGIN {
+  $App::GitGot::Command::status::VERSION = '0.2';
+}
+BEGIN {
+  $App::GitGot::Command::status::AUTHORITY = 'cpan:GENEHACK';
+}
 # ABSTRACT: print status info about repos
 
 use Moose;
@@ -75,7 +81,7 @@ App::GitGot::Command::status - print status info about repos
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 AUTHOR
 

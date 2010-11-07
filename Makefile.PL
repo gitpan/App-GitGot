@@ -12,7 +12,8 @@ my %WriteMakefileArgs = (
   'ABSTRACT' => 'A tool to make it easier to manage multiple git repositories.',
   'AUTHOR' => 'John SJ Anderson <genehack@genehack.org>',
   'BUILD_REQUIRES' => {
-    'English' => '0',
+    'File::Find' => '0',
+    'File::Temp' => '0',
     'Test::More' => '0'
   },
   'CONFIGURE_REQUIRES' => {
@@ -43,7 +44,7 @@ my %WriteMakefileArgs = (
     'namespace::autoclean' => '0',
     'version' => '0'
   },
-  'VERSION' => '0.1',
+  'VERSION' => '0.2',
   'test' => {
     'TESTS' => 't/*.t'
   }

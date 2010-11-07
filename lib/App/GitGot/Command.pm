@@ -1,4 +1,10 @@
 package App::GitGot::Command;
+BEGIN {
+  $App::GitGot::Command::VERSION = '0.2';
+}
+BEGIN {
+  $App::GitGot::Command::AUTHORITY = 'cpan:GENEHACK';
+}
 # ABSTRACT: Base class for App::GitGot commands
 
 use Moose;
@@ -195,6 +201,12 @@ sub _read_config {
 
 
 package App::GitGot::Repo;
+BEGIN {
+  $App::GitGot::Repo::VERSION = '0.2';
+}
+BEGIN {
+  $App::GitGot::Repo::AUTHORITY = 'cpan:GENEHACK';
+}
 use Moose;
 
 use 5.010;
@@ -290,7 +302,7 @@ App::GitGot::Command - Base class for App::GitGot commands
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 METHODS
 

@@ -1,4 +1,10 @@
 package App::GitGot::Command::list;
+BEGIN {
+  $App::GitGot::Command::list::VERSION = '0.2';
+}
+BEGIN {
+  $App::GitGot::Command::list::AUTHORITY = 'cpan:GENEHACK';
+}
 # ABSTRACT: list managed repositories
 
 use Moose;
@@ -42,7 +48,7 @@ App::GitGot::Command::list - list managed repositories
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 AUTHOR
 

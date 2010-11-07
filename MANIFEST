@@ -1,3 +1,5 @@
+CHANGES
+INSTALL
 LICENSE
 MANIFEST
 META.json
@@ -15,7 +17,9 @@ lib/App/GitGot/Command/remove.pm
 lib/App/GitGot/Command/status.pm
 lib/App/GitGot/Command/update.pm
 lib/App/GitGot/Command/version.pm
+t/00-compile.t
 t/01use.t
-t/author-critic.t
+t/release-eol.t
+t/release-kwalitee.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t

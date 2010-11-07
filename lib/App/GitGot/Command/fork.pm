@@ -1,4 +1,10 @@
 package App::GitGot::Command::fork;
+BEGIN {
+  $App::GitGot::Command::fork::VERSION = '0.2';
+}
+BEGIN {
+  $App::GitGot::Command::fork::AUTHORITY = 'cpan:GENEHACK';
+}
 # ABSTRACT: fork a github repo
 
 use Moose;
@@ -88,7 +94,7 @@ App::GitGot::Command::fork - fork a github repo
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 AUTHOR
 

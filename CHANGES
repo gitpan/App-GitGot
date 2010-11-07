@@ -1,0 +1,27 @@
+Revision History for App-GitGot
+===============================
+
+0.2
+---
+
+commit 5583a1f9380666ae7b57145384d9054416210024
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Sun Nov 7 10:13:49 2010 -0500
+
+    point to 'got' for docs
+
+commit 098ea19a584d906de16851f964799a1907092b75
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Sun Nov 7 10:13:40 2010 -0500
+
+    remove metainfo that's auto generated
+
+commit 9f13355d7366c1b373e060a1d34219d07f82b007
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Sun Nov 7 10:12:46 2010 -0500
+
+    clean up docs some more
+
+===================================
+End of changes in the last 365 days
+===================================

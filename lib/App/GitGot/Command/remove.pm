@@ -1,4 +1,10 @@
 package App::GitGot::Command::remove;
+BEGIN {
+  $App::GitGot::Command::remove::VERSION = '0.2';
+}
+BEGIN {
+  $App::GitGot::Command::remove::AUTHORITY = 'cpan:GENEHACK';
+}
 # ABSTRACT: remove a managed repository from your config
 
 use Moose;
@@ -55,7 +61,7 @@ App::GitGot::Command::remove - remove a managed repository from your config
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 AUTHOR
 

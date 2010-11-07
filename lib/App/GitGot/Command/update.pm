@@ -1,4 +1,10 @@
 package App::GitGot::Command::update;
+BEGIN {
+  $App::GitGot::Command::update::VERSION = '0.2';
+}
+BEGIN {
+  $App::GitGot::Command::update::AUTHORITY = 'cpan:GENEHACK';
+}
 # ABSTRACT: update managed repositories
 
 use Moose;
@@ -84,7 +90,7 @@ App::GitGot::Command::update - update managed repositories
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 AUTHOR
 

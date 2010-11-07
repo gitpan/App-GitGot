@@ -1,4 +1,10 @@
 package App::GitGot::Command::version;
+BEGIN {
+  $App::GitGot::Command::version::VERSION = '0.2';
+}
+BEGIN {
+  $App::GitGot::Command::version::AUTHORITY = 'cpan:GENEHACK';
+}
 # ABSTRACT: display application version
 
 use Moose;
@@ -22,7 +28,7 @@ App::GitGot::Command::version - display application version
 
 =head1 VERSION
 
-version 0.1
+version 0.2
 
 =head1 AUTHOR
 
