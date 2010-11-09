@@ -19,6 +19,7 @@ requires:
   Capture::Tiny: 0
   Config::INI::Reader: 0
   Cwd: 0
+  File::Basename: 0
   FindBin: 0
   List::MoreUtils: 0
   Moose: 0
@@ -37,7 +38,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=App-GitGot
   homepage: http://search.cpan.org/dist/App-GitGot/
   repository: git://github.com/genehack/app-gitgot.git
-version: 0.3
+version: 0.4
 x_Dist_Zilla:
   plugins:
     -

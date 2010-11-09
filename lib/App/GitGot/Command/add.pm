@@ -1,6 +1,6 @@
 package App::GitGot::Command::add;
 BEGIN {
-  $App::GitGot::Command::add::VERSION = '0.3';
+  $App::GitGot::Command::add::VERSION = '0.4';
 }
 BEGIN {
   $App::GitGot::Command::add::AUTHORITY = 'cpan:GENEHACK';
@@ -13,6 +13,7 @@ use 5.010;
 
 use Config::INI::Reader;
 use Cwd;
+use File::Basename;
 use Term::ReadLine;
 
 has 'defaults' => (
@@ -48,10 +49,13 @@ sub _build_new_entry_from_user_input {
   }
 
   if ( $self->defaults ) {
+    my $cwd = getcwd
+      or die "ERROR: Couldn't determine path";
+    $name //= basename getcwd;
     die "ERROR: Couldn't determine name"      unless $name;
-    die "ERROR: Couldn't determine repo path" unless $repo;
+    $repo //= '';
     die "ERROR: Couldn't determine repo type" unless $type;
-    $path = getcwd or die "ERROR: Couldn't determine path";
+    $path = $cwd;
   }
   else {
     my $term = Term::ReadLine->new('gitgot');
@@ -114,7 +118,7 @@ App::GitGot::Command::add - add a new repo to your config
 
 =head1 VERSION
 
-version 0.3
+version 0.4
 
 =head1 AUTHOR
 

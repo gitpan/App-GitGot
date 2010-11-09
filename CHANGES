@@ -1,8 +1,23 @@
 Revision History for App-GitGot
 ===============================
 
-0.3
+0.4
 ---
+
+commit ebd9ffa10ebb0be14104c6c8989271795555939f
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Mon Nov 8 21:00:48 2010 -0500
+
+    make 'add -D' more robust
+
+commit 18db97ef89d6059e9d2a357ba4a0c07df97a733d
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Sun Nov 7 10:33:50 2010 -0500
+
+    0.3 release
+
+v0.3 2010-11-07
+---------------
 
 commit d0cc3f66e3fd00bf22db41d7cfb7e93ef4824dbe
 Author: John SJ Anderson <genehack@genehack.org>

@@ -29,6 +29,7 @@ my %WriteMakefileArgs = (
     'Capture::Tiny' => '0',
     'Config::INI::Reader' => '0',
     'Cwd' => '0',
+    'File::Basename' => '0',
     'FindBin' => '0',
     'List::MoreUtils' => '0',
     'Moose' => '0',
@@ -43,7 +44,7 @@ my %WriteMakefileArgs = (
     'autodie' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '0.3',
+  'VERSION' => '0.4',
   'test' => {
     'TESTS' => 't/*.t'
   }

@@ -24,6 +24,7 @@
             "Capture::Tiny" : 0,
             "Config::INI::Reader" : 0,
             "Cwd" : 0,
+            "File::Basename" : 0,
             "FindBin" : 0,
             "List::MoreUtils" : 0,
             "Moose" : 0,
@@ -61,7 +62,7 @@
          "web" : "http://github.com/genehack/app-gitgot"
       }
    },
-   "version" : "0.3",
+   "version" : "0.4",
    "x_Dist_Zilla" : {
       "plugins" : [
          {
