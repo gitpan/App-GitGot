@@ -22,6 +22,7 @@ requires:
   File::Basename: 0
   FindBin: 0
   List::MoreUtils: 0
+  List::Util: 0
   Moose: 0
   MooseX::App::Cmd: 0
   MooseX::App::Cmd::Command: 0
@@ -38,7 +39,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=App-GitGot
   homepage: http://search.cpan.org/dist/App-GitGot/
   repository: git://github.com/genehack/app-gitgot.git
-version: 0.4
+version: 0.5
 x_Dist_Zilla:
   plugins:
     -

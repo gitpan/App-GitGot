@@ -1,6 +1,6 @@
 package App::GitGot::Command::remove;
 BEGIN {
-  $App::GitGot::Command::remove::VERSION = '0.4';
+  $App::GitGot::Command::remove::VERSION = '0.5';
 }
 BEGIN {
   $App::GitGot::Command::remove::AUTHORITY = 'cpan:GENEHACK';
@@ -36,7 +36,7 @@ sub _execute {
     my $number = $repo->number;
 
     if ( any { $number == $_->number } $self->active_repos ) {
-      my $name = $repo->name;
+      my $name = $repo->label;
 
       if ( $self->force or $self->prompt_yn( "got rm: remove '$name'?" )) {
         say "Removed repo '$name'" if $self->verbose;
@@ -61,7 +61,7 @@ App::GitGot::Command::remove - remove a managed repository from your config
 
 =head1 VERSION
 
-version 0.4
+version 0.5
 
 =head1 AUTHOR
 

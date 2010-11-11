@@ -1,8 +1,67 @@
 Revision History for App-GitGot
 ===============================
 
-0.4
+0.5
 ---
+
+commit e76239465999d0b03e32c92217bbc34b3e1346f8
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Wed Nov 10 20:14:18 2010 -0500
+
+    add 'by_path' support to 'update'
+
+commit 15adeca6ac697a69edb86f3a247bab39dab5879e
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Wed Nov 10 20:13:11 2010 -0500
+
+    add 'by_path' support to 'remove'
+
+commit 14688a470f949a9f637e5e34350c5bb57c4f4b52
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Wed Nov 10 20:11:52 2010 -0500
+
+    add 'by_path' option to 'status'
+
+commit 213234fb90b66f7554b9d710bf0afa363e329017
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Wed Nov 10 20:09:36 2010 -0500
+
+    refactor 'list' to move 'by_path' option into base
+    
+    first step towards support for 'by_path' in other subcommands
+
+commit 25718f58fc527df8af4c9db353c8fd2669b43277
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Wed Nov 10 09:12:44 2010 -0500
+
+    add 'by_path' option to 'list' sub-command
+
+commit 21ee1cb51124e3129662477347d9d438b96091be
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Tue Nov 9 23:57:01 2010 -0500
+
+    make repo name column auto-size to longest entry
+
+commit e03016f8ca6fd5883720e619884593d4b23a68c8
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Tue Nov 9 23:27:36 2010 -0500
+
+    add 'chdir' command
+
+commit 4616c290f409457cc67c61391bf1236745d57df4
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Tue Nov 9 06:13:49 2010 -0500
+
+    better output reporting for 'got up'
+
+commit f253cbce610e2c1bdb4247ce2f061a6d73a2338b
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Mon Nov 8 21:03:52 2010 -0500
+
+    released 0.4
+
+v0.4 2010-11-08
+---------------
 
 commit ebd9ffa10ebb0be14104c6c8989271795555939f
 Author: John SJ Anderson <genehack@genehack.org>

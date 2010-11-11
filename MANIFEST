@@ -11,6 +11,7 @@ dist.ini
 lib/App/GitGot.pm
 lib/App/GitGot/Command.pm
 lib/App/GitGot/Command/add.pm
+lib/App/GitGot/Command/chdir.pm
 lib/App/GitGot/Command/fork.pm
 lib/App/GitGot/Command/list.pm
 lib/App/GitGot/Command/remove.pm

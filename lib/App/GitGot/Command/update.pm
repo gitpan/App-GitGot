@@ -1,6 +1,6 @@
 package App::GitGot::Command::update;
 BEGIN {
-  $App::GitGot::Command::update::VERSION = '0.4';
+  $App::GitGot::Command::update::VERSION = '0.5';
 }
 BEGIN {
   $App::GitGot::Command::update::AUTHORITY = 'cpan:GENEHACK';
@@ -18,12 +18,14 @@ sub command_names { qw/ update up / }
 sub _execute {
   my ( $self, $opt, $args ) = @_;
 
+  my $max_len = $self->max_length_of_an_active_repo_label;
+
  REPO: for my $repo ( $self->active_repos ) {
     next REPO unless $repo->repo;
 
     my $name = $repo->name;
 
-    my $msg = sprintf "%3d) %-25s : ", $repo->number, $repo->name;
+    my $msg = sprintf "%3d) %-${max_len}s  : ", $repo->number, $repo->label;
 
     my ( $status, $fxn );
 
@@ -45,12 +47,12 @@ sub _git_update {
   my ( $self, $entry ) = @_
     or die "Need entry";
 
-  my $path = $entry->{path};
+  my $path = $entry->path;
 
   my $msg = '';
 
   if ( !-d $path ) {
-    my $repo = $entry->{repo};
+    my $repo = $entry->repo;
 
     my ( $o, $e ) = capture { system("git clone $repo $path") };
 
@@ -64,14 +66,11 @@ sub _git_update {
   elsif ( -d "$path/.git" ) {
     my ( $o, $e ) = capture { system("cd $path && git pull") };
 
-    if ( $o =~ /^Already up-to-date/m and !$e ) {
+    if ( $o =~ /^Already up-to-date/ ) {
       $msg .= 'Up to date' unless $self->quiet;
     }
-    elsif ( $e =~ /\S/ ) {
-      $msg .= 'ERROR';
-    }
     else {
-      $msg .= 'Updated';
+      $msg .= "\n$o$e";
     }
 
     return ( $self->verbose ) ? "$msg\n$o$e" : $msg;
@@ -90,7 +89,7 @@ App::GitGot::Command::update - update managed repositories
 
 =head1 VERSION
 
-version 0.4
+version 0.5
 
 =head1 AUTHOR
 

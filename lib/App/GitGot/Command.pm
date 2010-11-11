@@ -1,6 +1,6 @@
 package App::GitGot::Command;
 BEGIN {
-  $App::GitGot::Command::VERSION = '0.4';
+  $App::GitGot::Command::VERSION = '0.5';
 }
 BEGIN {
   $App::GitGot::Command::AUTHORITY = 'cpan:GENEHACK';
@@ -11,6 +11,7 @@ use Moose;
 extends 'MooseX::App::Cmd::Command';
 use 5.010;
 
+use List::Util qw/ max /;
 use Storable qw/ dclone /;
 use Try::Tiny;
 use YAML qw/ DumpFile LoadFile /;
@@ -23,6 +24,13 @@ has 'all' => (
   documentation => 'use all available repositories' ,
   cmd_aliases   => 'a',
   traits        => [qw/ Getopt /],
+);
+
+has 'by_path' => (
+  is          => 'rw' ,
+  isa         => 'Bool' ,
+  cmd_aliases => 'p',
+  traits      => [qw/ Getopt /],
 );
 
 has 'configfile' => (
@@ -93,6 +101,15 @@ sub execute {
 }
 
 
+sub max_length_of_an_active_repo_label {
+  my( $self ) = @_;
+
+  my $sort_key = $self->by_path ? 'path' : 'name';
+
+  return max ( map { length $_->$sort_key } $self->active_repos);
+}
+
+
 sub prompt_yn {
   my( $self , $message ) = @_;
   printf '%s [y/N]: ' , $message;
@@ -148,15 +165,18 @@ sub _build_full_repo_list {
 
   my $repo_count = 1;
 
+  my $sort_key = $self->by_path ? 'path' : 'name';
+
   my @parsed_config;
 
-  foreach my $entry ( sort { $a->{name} cmp $b->{name} } @$config ) {
+  foreach my $entry ( sort { $a->{$sort_key} cmp $b->{$sort_key} } @$config ) {
 
     # a completely empty entry is okay (this will happen when there's no
     # config at all...)
     keys %$entry or next;
 
     push @parsed_config , App::GitGot::Repo->new({
+      label => ( $self->by_path ) ? $entry->{path} : $entry->{name} ,
       entry => $entry ,
       count => $repo_count++ ,
     });
@@ -184,7 +204,6 @@ sub _expand_arg_list {
   ## use critic
 }
 
-
 sub _read_config {
   my $file = shift;
 
@@ -202,7 +221,7 @@ sub _read_config {
 
 package App::GitGot::Repo;
 BEGIN {
-  $App::GitGot::Repo::VERSION = '0.4';
+  $App::GitGot::Repo::VERSION = '0.5';
 }
 BEGIN {
   $App::GitGot::Repo::AUTHORITY = 'cpan:GENEHACK';
@@ -211,6 +230,12 @@ use Moose;
 
 use 5.010;
 use namespace::autoclean;
+
+has 'label' => (
+  is       => 'ro' ,
+  isa      => 'Str' ,
+  required => 1 ,
+);
 
 has 'name' => (
   is          => 'ro',
@@ -267,6 +292,7 @@ sub BUILDARGS {
   $entry->{tags} //= '';
 
   return {
+    label  => $args->{label} ,
     number => $count ,
     name   => $entry->{name} ,
     path   => $entry->{path} ,
@@ -302,9 +328,13 @@ App::GitGot::Command - Base class for App::GitGot commands
 
 =head1 VERSION
 
-version 0.4
+version 0.5
 
 =head1 METHODS
+
+=head2 max_length_of_an_active_repo_label
+
+Returns the length of the longest name in the active repo list.
 
 =head2 prompt_yn
 

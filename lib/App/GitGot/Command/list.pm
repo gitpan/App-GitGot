@@ -1,6 +1,6 @@
 package App::GitGot::Command::list;
 BEGIN {
-  $App::GitGot::Command::list::VERSION = '0.4';
+  $App::GitGot::Command::list::VERSION = '0.5';
 }
 BEGIN {
   $App::GitGot::Command::list::AUTHORITY = 'cpan:GENEHACK';
@@ -16,20 +16,20 @@ sub command_names { qw/ list ls / }
 sub _execute {
   my( $self, $opt, $args ) = @_;
 
+  my $max_len = $self->max_length_of_an_active_repo_label;
+
   for my $repo ( $self->active_repos ) {
-    my $repo_name;
+    my $repo_remote = ( $repo->repo and -d $repo->path ) ? $repo->repo
+      : ( $repo->repo ) ? $repo->repo . ' (Not checked out)'
+        : ( -d $repo->path ) ? 'NO REMOTE'
+          : 'ERROR: No remote and no repo?!';
 
-    if ( $repo->repo and -d $repo->path ) { $repo_name = $repo->repo }
-    elsif ( $repo->repo ) { $repo_name = $repo->repo . ' (Not checked out)' }
-    elsif ( -d $repo->path ) { $repo_name = 'NO REMOTE' }
-    else { $repo_name = 'ERROR: No remote and no repo?!' }
-
-    my $msg = sprintf "%-35s %-4s %-50s\n",
-      $repo->name, $repo->type, $repo_name;
+    my $msg = sprintf "%-${max_len}s  %-4s  %s\n",
+      $repo->label, $repo->type, $repo_remote;
 
     printf "%3d) ", $repo->number;
 
-    if ( $self->quiet ) { say $repo->name }
+    if ( $self->quiet ) { say $repo->label }
     elsif ( $self->verbose ) {
       printf "$msg    tags: %s\n" , $repo->tags;
     }
@@ -48,7 +48,7 @@ App::GitGot::Command::list - list managed repositories
 
 =head1 VERSION
 
-version 0.4
+version 0.5
 
 =head1 AUTHOR
 

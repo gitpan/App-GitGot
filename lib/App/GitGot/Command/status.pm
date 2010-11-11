@@ -1,6 +1,6 @@
 package App::GitGot::Command::status;
 BEGIN {
-  $App::GitGot::Command::status::VERSION = '0.4';
+  $App::GitGot::Command::status::VERSION = '0.5';
 }
 BEGIN {
   $App::GitGot::Command::status::AUTHORITY = 'cpan:GENEHACK';
@@ -18,8 +18,10 @@ sub command_names { qw/ status st / }
 sub _execute {
   my ( $self, $opt, $args ) = @_;
 
+  my $max_len = $self->max_length_of_an_active_repo_label;
+
  REPO: for my $repo ( $self->active_repos ) {
-    my $msg = sprintf "%3d) %-35s : ", $repo->number, $repo->name;
+    my $msg = sprintf "%3d) %-${max_len}s  : ", $repo->number, $repo->label;
 
     my ( $status, $fxn );
 
@@ -38,19 +40,19 @@ sub _execute {
       $status = 'Not checked out';
     }
     else {
-      my $name = $repo->name;
+      my $name = $repo->label;
       $status = "ERROR: repo '$name' does not exist";
     }
 
     say "$msg$status";
   }
-  }
+}
 
 sub _git_status {
   my ( $self, $entry ) = @_
     or die "Need entry";
 
-  my $path = $entry->{path};
+  my $path = $entry->path;
 
   my $msg = '';
 
@@ -81,7 +83,7 @@ App::GitGot::Command::status - print status info about repos
 
 =head1 VERSION
 
-version 0.4
+version 0.5
 
 =head1 AUTHOR
 

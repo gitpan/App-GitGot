@@ -27,6 +27,7 @@
             "File::Basename" : 0,
             "FindBin" : 0,
             "List::MoreUtils" : 0,
+            "List::Util" : 0,
             "Moose" : 0,
             "MooseX::App::Cmd" : 0,
             "MooseX::App::Cmd::Command" : 0,
@@ -62,7 +63,7 @@
          "web" : "http://github.com/genehack/app-gitgot"
       }
    },
-   "version" : "0.4",
+   "version" : "0.5",
    "x_Dist_Zilla" : {
       "plugins" : [
          {

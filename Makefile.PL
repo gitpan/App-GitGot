@@ -32,6 +32,7 @@ my %WriteMakefileArgs = (
     'File::Basename' => '0',
     'FindBin' => '0',
     'List::MoreUtils' => '0',
+    'List::Util' => '0',
     'Moose' => '0',
     'MooseX::App::Cmd' => '0',
     'MooseX::App::Cmd::Command' => '0',
@@ -44,7 +45,7 @@ my %WriteMakefileArgs = (
     'autodie' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '0.4',
+  'VERSION' => '0.5',
   'test' => {
     'TESTS' => 't/*.t'
   }
