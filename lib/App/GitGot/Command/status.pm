@@ -1,6 +1,6 @@
 package App::GitGot::Command::status;
 BEGIN {
-  $App::GitGot::Command::status::VERSION = '0.6';
+  $App::GitGot::Command::status::VERSION = '0.7';
 }
 BEGIN {
   $App::GitGot::Command::status::AUTHORITY = 'cpan:GENEHACK';
@@ -57,10 +57,37 @@ sub _git_status {
   my ( $self, $entry ) = @_
     or die "Need entry";
 
+  my( $msg , $verbose_msg ) = $self->_run_git_status( $entry );
+
+  $msg .= $self->_run_git_cherry( $entry );
+
+  return ( $self->verbose ) ? "$msg$verbose_msg" : $msg;
+}
+
+sub _run_git_cherry {
+  my( $self , $entry ) = @_;
+
   my $repo = Git::Wrapper->new( $entry->path );
 
   my $msg = '';
-  my $verbose_msg = '';
+
+  try {
+    if ( $repo->remote ) {
+      my $cherry = $repo->cherry;
+      if ( $cherry > 0 ) {
+        $msg = colored("Ahead by $cherry",'bold black on_green');
+      }
+    }
+  }
+  catch { $msg = colored('ERROR','bold white on_red') . "\n$_" };
+
+  return $msg
+}
+
+sub _run_git_status {
+  my( $self , $entry ) = @_;
+
+  my $repo = Git::Wrapper->new( $entry->path );
 
   my %types = (
     indexed  => 'Changes to be committed' ,
@@ -68,6 +95,8 @@ sub _git_status {
     unknown  => 'Untracked files' ,
     conflict => 'Files with conflicts' ,
   );
+
+  my( $msg , $verbose_msg ) = ('','');
 
   try {
     my $status = $repo->status;
@@ -80,8 +109,7 @@ sub _git_status {
         $verbose_msg .= "\n** $types{$type}:\n";
         for ( @states ) {
           $verbose_msg .= sprintf '  %-12s %s' , $_->mode , $_->from;
-          $verbose_msg .= sprintf ' -> %s' , $_->to
-            if $_->mode eq 'renamed';
+          $verbose_msg .= sprintf ' -> %s' , $_->to if $_->mode eq 'renamed';
           $verbose_msg .= "\n";
         }
       }
@@ -90,15 +118,7 @@ sub _git_status {
   }
   catch { $msg .= colored('ERROR','bold white on_red') . "\n$_" };
 
-  try {
-    my $cherry = $repo->cherry;
-    if ( $cherry > 0 ) {
-      $msg .= colored("Ahead by $cherry",'bold black on_green');
-    }
-  }
-  catch { $msg .= colored('ERROR','bold white on_red') . "\n$_" };
-
-  return ( $self->verbose ) ? "$msg$verbose_msg" : $msg;
+  return( $msg , $verbose_msg );
 }
 
 1;
@@ -112,7 +132,7 @@ App::GitGot::Command::status - print status info about repos
 
 =head1 VERSION
 
-version 0.6
+version 0.7
 
 =head1 AUTHOR
 

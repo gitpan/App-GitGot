@@ -1,6 +1,6 @@
 package App::GitGot::Command::chdir;
 BEGIN {
-  $App::GitGot::Command::chdir::VERSION = '0.6';
+  $App::GitGot::Command::chdir::VERSION = '0.7';
 }
 BEGIN {
   $App::GitGot::Command::chdir::AUTHORITY = 'cpan:GENEHACK';
@@ -38,7 +38,7 @@ App::GitGot::Command::chdir - fork a subshell in a selected project
 
 =head1 VERSION
 
-version 0.6
+version 0.7
 
 =head1 AUTHOR
 

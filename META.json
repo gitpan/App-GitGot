@@ -65,7 +65,7 @@
          "web" : "http://github.com/genehack/app-gitgot"
       }
    },
-   "version" : "0.6",
+   "version" : "0.7",
    "x_Dist_Zilla" : {
       "plugins" : [
          {

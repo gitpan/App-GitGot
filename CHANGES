@@ -1,8 +1,29 @@
 Revision History for App-GitGot
 ===============================
 
-0.6
+0.7
 ---
+
+commit b42d533f16c9cdb47b1b4bb627c2b8f290ffe5bb
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Thu Nov 11 23:53:38 2010 -0500
+
+    refactor 'status' subcommand
+
+commit ce8c5ded5b04d33c1be93382fa194e9160d51572
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Thu Nov 11 23:43:11 2010 -0500
+
+    Fix problem with repos without remotes
+
+commit ff2055bdbb4277725554dde6da775c02b6c80e5c
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Thu Nov 11 23:38:22 2010 -0500
+
+    released 0.6
+
+v0.6 2010-11-11
+---------------
 
 commit c1c11d7088a5af42d280c5b19b324dac5cf8910f
 Author: John SJ Anderson <genehack@genehack.org>
