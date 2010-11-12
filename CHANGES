@@ -1,8 +1,44 @@
 Revision History for App-GitGot
 ===============================
 
-0.5
+0.6
 ---
+
+commit c1c11d7088a5af42d280c5b19b324dac5cf8910f
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Thu Nov 11 23:07:44 2010 -0500
+
+    convert 'update' to Git::Wrapper
+
+commit ee9d8b423c8467f9bab4ae50174f5ec309d6abdd
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Thu Nov 11 22:51:13 2010 -0500
+
+    convert 'status' to Git::Wrapper
+
+commit 34023f55ebd8694f6fa029405e36b71c07b313b5
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Thu Nov 11 20:07:03 2010 -0500
+
+    'label' should not be required attr for Repo obj
+
+commit dc69f8d520a44a2951448f93c55fd3da54beca10
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Thu Nov 11 06:38:46 2010 -0500
+
+    add color output to 'status' and 'update'
+    
+    Does it make sense to add color anywhere else? These seem like
+    the main things that benefit...
+
+commit b8a74c4882676719396e49c258f54d233a615139
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Wed Nov 10 20:31:08 2010 -0500
+
+    release 0.5
+
+v0.5 2010-11-10
+---------------
 
 commit e76239465999d0b03e32c92217bbc34b3e1346f8
 Author: John SJ Anderson <genehack@genehack.org>

@@ -21,11 +21,12 @@
       },
       "runtime" : {
          "requires" : {
-            "Capture::Tiny" : 0,
             "Config::INI::Reader" : 0,
             "Cwd" : 0,
             "File::Basename" : 0,
+            "File::Path" : "2.08",
             "FindBin" : 0,
+            "Git::Wrapper" : 0,
             "List::MoreUtils" : 0,
             "List::Util" : 0,
             "Moose" : 0,
@@ -33,6 +34,7 @@
             "MooseX::App::Cmd::Command" : 0,
             "Net::GitHub::V2::Repositories" : 0,
             "Storable" : 0,
+            "Term::ANSIColor" : 0,
             "Term::ReadLine" : 0,
             "Term::ReadLine::Perl" : 0,
             "Try::Tiny" : 0,
@@ -63,7 +65,7 @@
          "web" : "http://github.com/genehack/app-gitgot"
       }
    },
-   "version" : "0.5",
+   "version" : "0.6",
    "x_Dist_Zilla" : {
       "plugins" : [
          {

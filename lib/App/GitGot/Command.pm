@@ -1,6 +1,6 @@
 package App::GitGot::Command;
 BEGIN {
-  $App::GitGot::Command::VERSION = '0.5';
+  $App::GitGot::Command::VERSION = '0.6';
 }
 BEGIN {
   $App::GitGot::Command::AUTHORITY = 'cpan:GENEHACK';
@@ -221,7 +221,7 @@ sub _read_config {
 
 package App::GitGot::Repo;
 BEGIN {
-  $App::GitGot::Repo::VERSION = '0.5';
+  $App::GitGot::Repo::VERSION = '0.6';
 }
 BEGIN {
   $App::GitGot::Repo::AUTHORITY = 'cpan:GENEHACK';
@@ -234,7 +234,6 @@ use namespace::autoclean;
 has 'label' => (
   is       => 'ro' ,
   isa      => 'Str' ,
-  required => 1 ,
 );
 
 has 'name' => (
@@ -291,8 +290,7 @@ sub BUILDARGS {
 
   $entry->{tags} //= '';
 
-  return {
-    label  => $args->{label} ,
+  my $return = {
     number => $count ,
     name   => $entry->{name} ,
     path   => $entry->{path} ,
@@ -300,6 +298,10 @@ sub BUILDARGS {
     type   => $entry->{type} ,
     tags   => $entry->{tags} ,
   };
+
+  $return->{label} = $args->{label} if $args->{label};
+
+  return $return;
 }
 
 sub in_writable_format {
@@ -328,7 +330,7 @@ App::GitGot::Command - Base class for App::GitGot commands
 
 =head1 VERSION
 
-version 0.5
+version 0.6
 
 =head1 METHODS
 

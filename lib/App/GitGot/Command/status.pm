@@ -1,6 +1,6 @@
 package App::GitGot::Command::status;
 BEGIN {
-  $App::GitGot::Command::status::VERSION = '0.5';
+  $App::GitGot::Command::status::VERSION = '0.6';
 }
 BEGIN {
   $App::GitGot::Command::status::AUTHORITY = 'cpan:GENEHACK';
@@ -11,7 +11,9 @@ use Moose;
 extends 'App::GitGot::Command';
 use 5.010;
 
-use Capture::Tiny qw/ capture /;
+use Git::Wrapper;
+use Term::ANSIColor;
+use Try::Tiny;
 
 sub command_names { qw/ status st / }
 
@@ -21,7 +23,9 @@ sub _execute {
   my $max_len = $self->max_length_of_an_active_repo_label;
 
  REPO: for my $repo ( $self->active_repos ) {
-    my $msg = sprintf "%3d) %-${max_len}s  : ", $repo->number, $repo->label;
+    my $label = $repo->label;
+
+    my $msg = sprintf "%3d) %-${max_len}s  : ", $repo->number, $label;
 
     my ( $status, $fxn );
 
@@ -29,7 +33,9 @@ sub _execute {
       given ( $repo->type ) {
         when ('git') { $fxn = '_git_status' }
         ### FIXME      when( 'svn' ) { $fxn = 'svn_status' }
-        default { $status = "ERROR: repo type '$_' not supported" }
+        default {
+          $status = colored("ERROR: repo type '$_' not supported", 'bold white on_red' );
+        }
       }
 
       $status = $self->$fxn($repo) if ($fxn);
@@ -40,8 +46,7 @@ sub _execute {
       $status = 'Not checked out';
     }
     else {
-      my $name = $repo->label;
-      $status = "ERROR: repo '$name' does not exist";
+      $status = colored("ERROR: repo '$label' does not exist",'bold white on_red' );
     }
 
     say "$msg$status";
@@ -52,24 +57,48 @@ sub _git_status {
   my ( $self, $entry ) = @_
     or die "Need entry";
 
-  my $path = $entry->path;
+  my $repo = Git::Wrapper->new( $entry->path );
 
   my $msg = '';
+  my $verbose_msg = '';
 
-  if ( -d "$path/.git" ) {
-    my ( $o, $e ) = capture { system("cd $path && git status") };
+  my %types = (
+    indexed  => 'Changes to be committed' ,
+    changed  => 'Changed but not updated' ,
+    unknown  => 'Untracked files' ,
+    conflict => 'Files with conflicts' ,
+  );
 
-    if ( $o =~ /^nothing to commit/m and !$e ) {
-      if ( $o =~ /Your branch is ahead .*? by (\d+) / ) {
-        $msg .= "Ahead by $1";
+  try {
+    my $status = $repo->status;
+    if ( keys %$status ) { $msg .= colored('Dirty','bold black on_bright_yellow') . ' ' }
+    else                 { $msg .= colored('OK ','green' ) unless $self->quiet }
+
+    if ( $self->verbose ) {
+    TYPE: for my $type ( keys %types ) {
+        my @states = $status->get( $type ) or next TYPE;
+        $verbose_msg .= "\n** $types{$type}:\n";
+        for ( @states ) {
+          $verbose_msg .= sprintf '  %-12s %s' , $_->mode , $_->from;
+          $verbose_msg .= sprintf ' -> %s' , $_->to
+            if $_->mode eq 'renamed';
+          $verbose_msg .= "\n";
+        }
       }
-      else { $msg .= 'OK' unless $self->quiet }
+      $verbose_msg = "\n$verbose_msg" if $verbose_msg;
     }
-    elsif ($e) { $msg .= 'ERROR' }
-    else       { $msg .= 'Dirty' }
-
-    return ( $self->verbose ) ? "$msg\n$o$e" : $msg;
   }
+  catch { $msg .= colored('ERROR','bold white on_red') . "\n$_" };
+
+  try {
+    my $cherry = $repo->cherry;
+    if ( $cherry > 0 ) {
+      $msg .= colored("Ahead by $cherry",'bold black on_green');
+    }
+  }
+  catch { $msg .= colored('ERROR','bold white on_red') . "\n$_" };
+
+  return ( $self->verbose ) ? "$msg$verbose_msg" : $msg;
 }
 
 1;
@@ -83,7 +112,7 @@ App::GitGot::Command::status - print status info about repos
 
 =head1 VERSION
 
-version 0.5
+version 0.6
 
 =head1 AUTHOR
 

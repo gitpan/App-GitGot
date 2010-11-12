@@ -16,11 +16,12 @@ meta-spec:
   version: 1.4
 name: App-GitGot
 requires:
-  Capture::Tiny: 0
   Config::INI::Reader: 0
   Cwd: 0
   File::Basename: 0
+  File::Path: 2.08
   FindBin: 0
+  Git::Wrapper: 0
   List::MoreUtils: 0
   List::Util: 0
   Moose: 0
@@ -28,6 +29,7 @@ requires:
   MooseX::App::Cmd::Command: 0
   Net::GitHub::V2::Repositories: 0
   Storable: 0
+  Term::ANSIColor: 0
   Term::ReadLine: 0
   Term::ReadLine::Perl: 0
   Try::Tiny: 0
@@ -39,7 +41,7 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=App-GitGot
   homepage: http://search.cpan.org/dist/App-GitGot/
   repository: git://github.com/genehack/app-gitgot.git
-version: 0.5
+version: 0.6
 x_Dist_Zilla:
   plugins:
     -
