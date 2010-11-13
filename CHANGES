@@ -1,8 +1,27 @@
 Revision History for App-GitGot
 ===============================
 
-0.7
+0.8
 ---
+
+commit f9639f92ad7bc1cffef4125e05b78d369a576a5a
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Sat Nov 13 09:34:25 2010 -0500
+
+    Set up intelligent paging for all outputs
+    
+    * Should still have colored output if PAGER=less
+    * Should not page if <1 page of output
+    * Should work as before if IO::Page is not installed
+
+commit 40a0c68386c5bd41c1632775b97c6d151c892038
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Thu Nov 11 23:54:50 2010 -0500
+
+    released 0.7
+
+v0.7 2010-11-11
+---------------
 
 commit b42d533f16c9cdb47b1b4bb627c2b8f290ffe5bb
 Author: John SJ Anderson <genehack@genehack.org>

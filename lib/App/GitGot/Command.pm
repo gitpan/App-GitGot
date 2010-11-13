@@ -1,6 +1,6 @@
 package App::GitGot::Command;
 BEGIN {
-  $App::GitGot::Command::VERSION = '0.7';
+  $App::GitGot::Command::VERSION = '0.8';
 }
 BEGIN {
   $App::GitGot::Command::AUTHORITY = 'cpan:GENEHACK';
@@ -97,6 +97,15 @@ has 'full_repo_list' => (
 sub execute {
   my( $self , $opt , $args ) = @_;
   $self->args( $args );
+
+  # set up colored output if we page thru less
+  # also exit pager immediately if <1 page of output
+  $ENV{LESS} = 'RF';
+
+  # don't catch any errors here; if this fails we just output stuff like
+  # normal and nobody is the wiser.
+  eval 'use IO::Page';
+
   $self->_execute($opt,$args);
 }
 
@@ -221,7 +230,7 @@ sub _read_config {
 
 package App::GitGot::Repo;
 BEGIN {
-  $App::GitGot::Repo::VERSION = '0.7';
+  $App::GitGot::Repo::VERSION = '0.8';
 }
 BEGIN {
   $App::GitGot::Repo::AUTHORITY = 'cpan:GENEHACK';
@@ -330,7 +339,7 @@ App::GitGot::Command - Base class for App::GitGot commands
 
 =head1 VERSION
 
-version 0.7
+version 0.8
 
 =head1 METHODS
 
