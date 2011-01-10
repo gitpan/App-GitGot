@@ -1,6 +1,6 @@
 package App::GitGot::Command::chdir;
 BEGIN {
-  $App::GitGot::Command::chdir::VERSION = '0.9.1';
+  $App::GitGot::Command::chdir::VERSION = '0.9.2';
 }
 BEGIN {
   $App::GitGot::Command::chdir::AUTHORITY = 'cpan:GENEHACK';
@@ -38,7 +38,7 @@ App::GitGot::Command::chdir - open a subshell in a selected project
 
 =head1 VERSION
 
-version 0.9.1
+version 0.9.2
 
 =head1 AUTHOR
 

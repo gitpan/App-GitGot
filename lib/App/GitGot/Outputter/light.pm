@@ -1,6 +1,6 @@
 package App::GitGot::Outputter::light;
 BEGIN {
-  $App::GitGot::Outputter::light::VERSION = '0.9.1';
+  $App::GitGot::Outputter::light::VERSION = '0.9.2';
 }
 BEGIN {
   $App::GitGot::Outputter::light::AUTHORITY = 'cpan:GENEHACK';
@@ -49,7 +49,7 @@ App::GitGot::Outputter::light - Color scheme appropriate for dark terminal backg
 
 =head1 VERSION
 
-version 0.9.1
+version 0.9.2
 
 =head1 AUTHOR
 
