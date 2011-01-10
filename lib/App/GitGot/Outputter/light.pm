@@ -1,6 +1,6 @@
 package App::GitGot::Outputter::light;
 BEGIN {
-  $App::GitGot::Outputter::light::VERSION = '0.9';
+  $App::GitGot::Outputter::light::VERSION = '0.9.1';
 }
 BEGIN {
   $App::GitGot::Outputter::light::AUTHORITY = 'cpan:GENEHACK';
@@ -16,6 +16,9 @@ has 'color_error' => (
   isa     => 'Str' ,
   default => 'bold red'
 );
+
+# Color choices by drdrang based on a conversation that started with
+# <http://www.leancrew.com/all-this/2010/12/batch-comparison-of-git-repositories/>
 
 has 'color_warning' => (
   is      => 'ro' ,
@@ -46,7 +49,7 @@ App::GitGot::Outputter::light - Color scheme appropriate for dark terminal backg
 
 =head1 VERSION
 
-version 0.9
+version 0.9.1
 
 =head1 AUTHOR
 

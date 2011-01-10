@@ -1,6 +1,6 @@
 package App::GitGot::Command;
 BEGIN {
-  $App::GitGot::Command::VERSION = '0.9';
+  $App::GitGot::Command::VERSION = '0.9.1';
 }
 BEGIN {
   $App::GitGot::Command::AUTHORITY = 'cpan:GENEHACK';
@@ -285,7 +285,7 @@ sub _read_config {
 
 package App::GitGot::Repo;
 BEGIN {
-  $App::GitGot::Repo::VERSION = '0.9';
+  $App::GitGot::Repo::VERSION = '0.9.1';
 }
 BEGIN {
   $App::GitGot::Repo::AUTHORITY = 'cpan:GENEHACK';
@@ -453,7 +453,7 @@ App::GitGot::Command - Base class for App::GitGot commands
 
 =head1 VERSION
 
-version 0.9
+version 0.9.1
 
 =head1 METHODS
 
