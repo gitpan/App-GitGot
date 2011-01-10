@@ -1,6 +1,6 @@
 package App::GitGot::Command::status;
 BEGIN {
-  $App::GitGot::Command::status::VERSION = '0.8';
+  $App::GitGot::Command::status::VERSION = '0.9';
 }
 BEGIN {
   $App::GitGot::Command::status::AUTHORITY = 'cpan:GENEHACK';
@@ -11,7 +11,6 @@ use Moose;
 extends 'App::GitGot::Command';
 use 5.010;
 
-use Git::Wrapper;
 use Term::ANSIColor;
 use Try::Tiny;
 
@@ -34,7 +33,7 @@ sub _execute {
         when ('git') { $fxn = '_git_status' }
         ### FIXME      when( 'svn' ) { $fxn = 'svn_status' }
         default {
-          $status = colored("ERROR: repo type '$_' not supported", 'bold white on_red' );
+          $status = $self->error("ERROR: repo type '$_' not supported");
         }
       }
 
@@ -46,7 +45,7 @@ sub _execute {
       $status = 'Not checked out';
     }
     else {
-      $status = colored("ERROR: repo '$label' does not exist",'bold white on_red' );
+      $status = $self->error("ERROR: repo '$label' does not exist");
     }
 
     say "$msg$status";
@@ -59,7 +58,8 @@ sub _git_status {
 
   my( $msg , $verbose_msg ) = $self->_run_git_status( $entry );
 
-  $msg .= $self->_run_git_cherry( $entry );
+  $msg .= $self->_run_git_cherry( $entry )
+    if $entry->current_remote_branch;
 
   return ( $self->verbose ) ? "$msg$verbose_msg" : $msg;
 }
@@ -67,27 +67,23 @@ sub _git_status {
 sub _run_git_cherry {
   my( $self , $entry ) = @_;
 
-  my $repo = Git::Wrapper->new( $entry->path );
-
   my $msg = '';
 
   try {
-    if ( $repo->remote ) {
-      my $cherry = $repo->cherry;
+    if ( $entry->remote ) {
+      my $cherry = $entry->cherry;
       if ( $cherry > 0 ) {
-        $msg = colored("Ahead by $cherry",'bold black on_green');
+        $msg = $self->major_change("Ahead by $cherry");
       }
     }
   }
-  catch { $msg = colored('ERROR','bold white on_red') . "\n$_" };
+  catch { $msg = $self->error('ERROR') . "\n$_" };
 
   return $msg
 }
 
 sub _run_git_status {
   my( $self , $entry ) = @_;
-
-  my $repo = Git::Wrapper->new( $entry->path );
 
   my %types = (
     indexed  => 'Changes to be committed' ,
@@ -99,9 +95,9 @@ sub _run_git_status {
   my( $msg , $verbose_msg ) = ('','');
 
   try {
-    my $status = $repo->status;
-    if ( keys %$status ) { $msg .= colored('Dirty','bold black on_bright_yellow') . ' ' }
-    else                 { $msg .= colored('OK ','green' ) unless $self->quiet }
+    my $status = $entry->status;
+    if ( keys %$status ) { $msg .= $self->warning('Dirty') . ' ' }
+    else                 { $msg .= $self->minor_change('OK ') unless $self->quiet }
 
     if ( $self->verbose ) {
     TYPE: for my $type ( keys %types ) {
@@ -116,7 +112,7 @@ sub _run_git_status {
       $verbose_msg = "\n$verbose_msg" if $verbose_msg;
     }
   }
-  catch { $msg .= colored('ERROR','bold white on_red') . "\n$_" };
+  catch { $msg .= $self->error('ERROR') . "\n$_" };
 
   return( $msg , $verbose_msg );
 }
@@ -132,7 +128,7 @@ App::GitGot::Command::status - print status info about repos
 
 =head1 VERSION
 
-version 0.8
+version 0.9
 
 =head1 AUTHOR
 

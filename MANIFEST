@@ -18,6 +18,9 @@ lib/App/GitGot/Command/remove.pm
 lib/App/GitGot/Command/status.pm
 lib/App/GitGot/Command/update.pm
 lib/App/GitGot/Command/version.pm
+lib/App/GitGot/Outputter.pm
+lib/App/GitGot/Outputter/dark.pm
+lib/App/GitGot/Outputter/light.pm
 t/00-compile.t
 t/01use.t
 t/release-eol.t

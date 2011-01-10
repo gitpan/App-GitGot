@@ -1,11 +1,11 @@
 package App::GitGot::Command::chdir;
 BEGIN {
-  $App::GitGot::Command::chdir::VERSION = '0.8';
+  $App::GitGot::Command::chdir::VERSION = '0.9';
 }
 BEGIN {
   $App::GitGot::Command::chdir::AUTHORITY = 'cpan:GENEHACK';
 }
-# ABSTRACT: fork a subshell in a selected project
+# ABSTRACT: open a subshell in a selected project
 
 use Moose;
 extends 'App::GitGot::Command';
@@ -34,11 +34,11 @@ __END__
 
 =head1 NAME
 
-App::GitGot::Command::chdir - fork a subshell in a selected project
+App::GitGot::Command::chdir - open a subshell in a selected project
 
 =head1 VERSION
 
-version 0.8
+version 0.9
 
 =head1 AUTHOR
 

@@ -1,6 +1,6 @@
 package App::GitGot::Command::update;
 BEGIN {
-  $App::GitGot::Command::update::VERSION = '0.8';
+  $App::GitGot::Command::update::VERSION = '0.9';
 }
 BEGIN {
   $App::GitGot::Command::update::AUTHORITY = 'cpan:GENEHACK';
@@ -12,7 +12,6 @@ extends 'App::GitGot::Command';
 use 5.010;
 
 use File::Path 2.08 qw/ make_path /;
-use Git::Wrapper;
 use Term::ANSIColor;
 use Try::Tiny;
 
@@ -36,7 +35,7 @@ sub _execute {
       when ('git') { $fxn = '_git_update' }
       ### FIXME      when( 'svn' ) { $fxn = 'svn_update' }
       default {
-        $status = colored("ERROR: repo type '$_' not supported",'bold white on_red');
+        $status = $self->error("ERROR: repo type '$_' not supported");
       }
     }
 
@@ -52,33 +51,32 @@ sub _git_update {
   my ( $self, $entry ) = @_
     or die "Need entry";
 
-  my $path = $entry->path;
-  my $repo = Git::Wrapper->new( $path );
-
   my $msg = '';
+
+  my $path = $entry->path;
 
   if ( !-d $path ) {
     make_path $path;
 
     try {
-      $repo->clone( $entry->repo , './' );
-      $msg .= colored('Checked out','bold white on_green');
+      $entry->clone( $entry->repo , './' );
+      $msg .= $self->major_change('Checked out');
     }
-    catch { $msg .= colored('ERROR','bold white on_red') . "\n$_" };
+    catch { $msg .= $self->error('ERROR') . "\n$_" };
   }
   elsif ( -d "$path/.git" ) {
     try {
-      my @o = $repo->pull;
+      my @o = $entry->pull;
       if ( $o[0] eq 'Already up-to-date.' ) {
-        $msg .= colored('Up to date','green') unless $self->quiet;
+        $msg .= $self->minor_change('Up to date') unless $self->quiet;
       }
       else {
-        $msg .= colored('Updated','bold black on_green');
+        $msg .= $self->major_change('Updated');
         $msg .= "\n" . join("\n",@o) unless $self->quiet;
       }
     }
   }
-  catch { $msg .= colored('ERROR','bold white on_red') . "\n$_" };
+  catch { $msg .= $self->error('ERROR') . "\n$_" };
 
   return $msg;
 }
@@ -94,7 +92,7 @@ App::GitGot::Command::update - update managed repositories
 
 =head1 VERSION
 
-version 0.8
+version 0.9
 
 =head1 AUTHOR
 

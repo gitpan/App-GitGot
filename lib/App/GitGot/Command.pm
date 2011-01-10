@@ -1,6 +1,6 @@
 package App::GitGot::Command;
 BEGIN {
-  $App::GitGot::Command::VERSION = '0.8';
+  $App::GitGot::Command::VERSION = '0.9';
 }
 BEGIN {
   $App::GitGot::Command::AUTHORITY = 'cpan:GENEHACK';
@@ -33,6 +33,15 @@ has 'by_path' => (
   traits      => [qw/ Getopt /],
 );
 
+has 'color_scheme' => (
+  is            => 'rw',
+  isa           => 'Str',
+  documentation => 'name of color scheme to use',
+  default       => 'dark',
+  cmd_aliases   => 'c' ,
+  traits        => [qw/ Getopt /],
+);
+
 has 'configfile' => (
   is            => 'rw',
   isa           => 'Str',
@@ -40,6 +49,15 @@ has 'configfile' => (
   default       => "$ENV{HOME}/.gitgot",
   traits        => [qw/ Getopt /],
   required      => 1,
+);
+
+has 'no_color' => (
+  is            => 'rw',
+  isa           => 'Bool',
+  documentation => 'do not use colored output',
+  default       => 0,
+  cmd_aliases   => 'C',
+  traits        => [qw/ Getopt /],
 );
 
 has 'quiet' => (
@@ -92,6 +110,19 @@ has 'full_repo_list' => (
     add_repo  => 'push' ,
     all_repos => 'elements' ,
   } ,
+);
+
+has 'outputter' => (
+  is => 'ro' ,
+  isa => 'App::GitGot::Outputter' ,
+  traits => [ qw/ NoGetopt / ] ,
+  lazy_build => 1 ,
+  handles => [
+    'error' ,
+    'warning' ,
+    'major_change' ,
+    'minor_change' ,
+  ] ,
 );
 
 sub execute {
@@ -194,6 +225,30 @@ sub _build_full_repo_list {
   return \@parsed_config;
 }
 
+sub _build_outputter {
+  my $self = shift;
+
+  my $scheme = $self->color_scheme;
+
+  if ( $scheme =~ /^\+/ ) {
+    $scheme =~ s/^\+//;
+  }
+  else {
+    $scheme = "App::GitGot::Outputter::$scheme"
+  }
+
+  try {
+    eval "use $scheme";
+    die $@ if $@;
+  }
+  catch {
+    say "Failed to load color scheme '$scheme'.\nExitting now.\n";
+    exit(5);
+  };
+
+  return $scheme->new({ no_color => $self->no_color });
+}
+
 sub _expand_arg_list {
   my $args = shift;
 
@@ -230,15 +285,17 @@ sub _read_config {
 
 package App::GitGot::Repo;
 BEGIN {
-  $App::GitGot::Repo::VERSION = '0.8';
+  $App::GitGot::Repo::VERSION = '0.9';
 }
 BEGIN {
   $App::GitGot::Repo::AUTHORITY = 'cpan:GENEHACK';
 }
 use Moose;
-
 use 5.010;
+
 use namespace::autoclean;
+use Git::Wrapper;
+use Try::Tiny;
 
 has 'label' => (
   is       => 'ro' ,
@@ -279,6 +336,28 @@ has 'type' => (
   required    => 1 ,
 );
 
+has '_wrapper' => (
+  is         => 'ro' ,
+  isa        => 'Git::Wrapper' ,
+  lazy_build => 1 ,
+  handles    => [ qw/
+                      cherry
+                      clone
+                      config
+                      pull
+                      remote
+                      status
+                      symbolic_ref
+                    / ] ,
+);
+
+sub _build__wrapper {
+  my $self = shift;
+
+  return Git::Wrapper->new( $self->path )
+    or die "Can't make Git::Wrapper";
+}
+
 sub BUILDARGS {
   my( $class , $args ) = @_;
 
@@ -313,6 +392,41 @@ sub BUILDARGS {
   return $return;
 }
 
+sub current_branch {
+  my $self = shift;
+
+  my $branch;
+
+  try {
+    my( $branch ) = $self->symbolic_ref( 'HEAD' );
+    $branch =~ s|^refs/heads/||;
+  }
+  catch {
+    die $_ unless $_ && $_->isa('Git::Wrapper::Exception')
+      && $_->error eq "fatal: ref HEAD is not a symbolic ref\n"
+  };
+
+  return $branch;
+}
+
+sub current_remote_branch {
+  my( $self ) = shift;
+
+  my $remote;
+
+  if ( my $branch = $self->current_branch ) {
+    try {
+      ( $remote ) = $self->config( "branch.$branch.remote" );
+    }
+    catch {
+      ## not the most informative return....
+      return 0 if $_ && $_->isa('Git::Wrapper::Exception') && $_->{status} eq '1';
+    };
+  }
+
+  return $remote;
+}
+
 sub in_writable_format {
   my $self = shift;
 
@@ -339,7 +453,7 @@ App::GitGot::Command - Base class for App::GitGot commands
 
 =head1 VERSION
 
-version 0.8
+version 0.9
 
 =head1 METHODS
 

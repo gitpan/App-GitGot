@@ -1,8 +1,60 @@
 Revision History for App-GitGot
 ===============================
 
-0.8
+0.9
 ---
+
+commit a5eae021e9a19eeb8ac4293027e4877e6b0f08ec
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Mon Jan 10 15:17:47 2011 -0500
+
+    add configurable color output
+    
+    color schemes, ability to disable color output, documentation, etc.
+
+commit f51676a281d9a3a6b1e8142fc3e9830bcab40a0c
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Sat Nov 20 15:16:05 2010 -0500
+
+    refactor branch methods to handle detached HEADs
+
+commit e94cd1406f1eb183a4aefcc51de53ab84a5158a8
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Fri Nov 19 06:27:05 2010 -0500
+
+    refactor & move stuff into Repo objects
+
+commit 572a7c624c2fe34c236ba26d86c86a7bbb13b997
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Fri Nov 19 06:17:34 2010 -0500
+
+    don't attempt cherry check unless there's a remote
+
+commit a4ec7116988b33e52b071db01a2b28e84c8fe3d2
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Fri Nov 19 06:14:30 2010 -0500
+
+    Pull Git::Wrapper into repo object as an attr
+    
+    * lazy-build a Git::Wrapper in the repo entry object
+    * delegate the various Git::Wrapper methods to _wrapper attr
+    * update status and update subcommands to no longer create
+      their own Git::Wrapper objects
+
+commit 7b465710d9b738e830e435c7e28060ebb261bab6
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Wed Nov 17 06:07:22 2010 -0500
+
+    doc tweaks
+
+commit 1fb1ff7abc55a990c97d109f946a7aadbcd2e77b
+Author: John SJ Anderson <genehack@genehack.org>
+Date:   Sat Nov 13 15:56:52 2010 -0500
+
+    released 0.8
+
+v0.8 2010-11-13
+---------------
 
 commit f9639f92ad7bc1cffef4125e05b78d369a576a5a
 Author: John SJ Anderson <genehack@genehack.org>
