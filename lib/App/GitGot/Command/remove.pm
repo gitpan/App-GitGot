@@ -1,6 +1,6 @@
 package App::GitGot::Command::remove;
 BEGIN {
-  $App::GitGot::Command::remove::VERSION = '0.9.2';
+  $App::GitGot::Command::remove::VERSION = '1.0';
 }
 BEGIN {
   $App::GitGot::Command::remove::AUTHORITY = 'cpan:GENEHACK';
@@ -16,7 +16,6 @@ use List::MoreUtils qw/ any /;
 has 'force' => (
   is          => 'rw',
   isa         => 'Bool',
-  cmd_aliases => 'f',
   traits      => [qw/ Getopt /],
 );
 
@@ -26,8 +25,8 @@ sub _execute {
   my( $self, $opt, $args ) = @_;
 
   unless ( $self->active_repos and @$args or $self->tags) {
-    say "You need to select one or more repos to remove";
-    exit;
+    say STDERR "ERROR: You need to select one or more repos to remove";
+    exit(1);
   }
 
   my @new_repo_list;
@@ -50,6 +49,7 @@ sub _execute {
   $self->write_config();
 }
 
+__PACKAGE__->meta->make_immutable;
 1;
 
 __END__
@@ -61,7 +61,7 @@ App::GitGot::Command::remove - remove a managed repository from your config
 
 =head1 VERSION
 
-version 0.9.2
+version 1.0
 
 =head1 AUTHOR
 

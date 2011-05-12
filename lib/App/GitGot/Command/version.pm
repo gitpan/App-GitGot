@@ -1,6 +1,6 @@
 package App::GitGot::Command::version;
 BEGIN {
-  $App::GitGot::Command::version::VERSION = '0.9.2';
+  $App::GitGot::Command::version::VERSION = '1.0';
 }
 BEGIN {
   $App::GitGot::Command::version::AUTHORITY = 'cpan:GENEHACK';
@@ -11,12 +11,9 @@ use Moose;
 extends 'App::GitGot::Command';
 use 5.010;
 
-sub _execute {
-  my( $self, $opt, $args ) = @_;
+sub _execute { say $App::GitGot::VERSION }
 
-  say $App::GitGot::VERSION
-}
-
+__PACKAGE__->meta->make_immutable;
 1;
 
 __END__
@@ -28,7 +25,7 @@ App::GitGot::Command::version - display application version
 
 =head1 VERSION
 
-version 0.9.2
+version 1.0
 
 =head1 AUTHOR
 

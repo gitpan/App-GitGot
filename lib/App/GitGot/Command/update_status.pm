@@ -1,21 +1,25 @@
-package App::GitGot::Command::status;
+package App::GitGot::Command::update_status;
 BEGIN {
-  $App::GitGot::Command::status::VERSION = '1.0';
+  $App::GitGot::Command::update_status::VERSION = '1.0';
 }
 BEGIN {
-  $App::GitGot::Command::status::AUTHORITY = 'cpan:GENEHACK';
+  $App::GitGot::Command::update_status::AUTHORITY = 'cpan:GENEHACK';
 }
-# ABSTRACT: print status info about repos
+# ABSTRACT: update managed repositories then display their status
 
 use Moose;
 extends 'App::GitGot::Command';
 use 5.010;
 
-sub command_names { qw/ status st / }
+sub command_names { qw/ update_status upst / }
 
 sub _execute {
   my ( $self, $opt, $args ) = @_;
 
+  say "UPDATE";
+  $self->_update( $self->active_repos );
+
+  say "\nSTATUS";
   $self->_status( $self->active_repos );
 }
 
@@ -27,7 +31,7 @@ __END__
 
 =head1 NAME
 
-App::GitGot::Command::status - print status info about repos
+App::GitGot::Command::update_status - update managed repositories then display their status
 
 =head1 VERSION
 

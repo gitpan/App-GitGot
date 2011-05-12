@@ -1,6 +1,6 @@
 package App::GitGot::Outputter;
 BEGIN {
-  $App::GitGot::Outputter::VERSION = '0.9.2';
+  $App::GitGot::Outputter::VERSION = '1.0';
 }
 BEGIN {
   $App::GitGot::Outputter::AUTHORITY = 'cpan:GENEHACK';
@@ -42,12 +42,12 @@ sub minor_change {
 sub _colored {
   my( $self , $message , $color_string ) = @_;
 
-  return ( $self->no_color || $color_string eq 'uncolored' ) ?
-    $message :
-      colored( $message , $color_string );
+  return ( $self->no_color || $color_string eq 'uncolored' ) ? $message
+    : colored( $message , $color_string );
 }
 
 __PACKAGE__->meta->make_immutable;
+1;
 
 __END__
 =pod
@@ -58,7 +58,7 @@ App::GitGot::Outputter - Generic base class for outputting formatted messages.
 
 =head1 VERSION
 
-version 0.9.2
+version 1.0
 
 =head1 METHODS
 

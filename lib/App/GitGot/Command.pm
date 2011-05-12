@@ -1,6 +1,6 @@
 package App::GitGot::Command;
 BEGIN {
-  $App::GitGot::Command::VERSION = '0.9.2';
+  $App::GitGot::Command::VERSION = '1.0';
 }
 BEGIN {
   $App::GitGot::Command::AUTHORITY = 'cpan:GENEHACK';
@@ -11,10 +11,11 @@ use Moose;
 extends 'MooseX::App::Cmd::Command';
 use 5.010;
 
-use List::Util qw/ max /;
-use Storable qw/ dclone /;
+use App::GitGot::Repo::Git;
+use File::Path 2.08         qw/ make_path /;
+use List::Util              qw/ max /;
 use Try::Tiny;
-use YAML qw/ DumpFile LoadFile /;
+use YAML                    qw/ DumpFile LoadFile /;
 use namespace::autoclean;
 
 # option attrs
@@ -47,6 +48,7 @@ has 'configfile' => (
   isa           => 'Str',
   documentation => 'path to config file',
   default       => "$ENV{HOME}/.gitgot",
+  cmd_aliases   => 'f' ,
   traits        => [qw/ Getopt /],
   required      => 1,
 );
@@ -87,7 +89,7 @@ has 'verbose' => (
 # non-option attrs
 has 'active_repo_list' => (
   is         => 'rw',
-  isa        => 'ArrayRef[App::GitGot::Repo]' ,
+  isa        => 'ArrayRef[App::GitGot::Repo::Git]' ,
   traits     => [qw/ NoGetopt Array /],
   lazy_build => 1 ,
   handles    => {
@@ -96,14 +98,14 @@ has 'active_repo_list' => (
 );
 
 has 'args' => (
-  is => 'rw' ,
-  isa => 'ArrayRef' ,
+  is     => 'rw' ,
+  isa    => 'ArrayRef' ,
   traits => [ qw/ NoGetopt / ] ,
 );
 
 has 'full_repo_list' => (
   is         => 'rw',
-  isa        => 'ArrayRef[App::GitGot::Repo]' ,
+  isa        => 'ArrayRef[App::GitGot::Repo::Git]' ,
   traits     => [qw/ NoGetopt Array /],
   lazy_build => 1 ,
   handles    => {
@@ -113,11 +115,11 @@ has 'full_repo_list' => (
 );
 
 has 'outputter' => (
-  is => 'ro' ,
-  isa => 'App::GitGot::Outputter' ,
-  traits => [ qw/ NoGetopt / ] ,
+  is         => 'ro' ,
+  isa        => 'App::GitGot::Outputter' ,
+  traits     => [ qw/ NoGetopt / ] ,
   lazy_build => 1 ,
-  handles => [
+  handles    => [
     'error' ,
     'warning' ,
     'major_change' ,
@@ -131,11 +133,11 @@ sub execute {
 
   # set up colored output if we page thru less
   # also exit pager immediately if <1 page of output
-  $ENV{LESS} = 'RF';
+  $ENV{LESS} = 'RFX';
 
   # don't catch any errors here; if this fails we just output stuff like
   # normal and nobody is the wiser.
-  eval 'use IO::Page';
+  eval 'use IO::Page' if $self->_use_io_page;
 
   $self->_execute($opt,$args);
 }
@@ -215,7 +217,7 @@ sub _build_full_repo_list {
     # config at all...)
     keys %$entry or next;
 
-    push @parsed_config , App::GitGot::Repo->new({
+    push @parsed_config , App::GitGot::Repo::Git->new({
       label => ( $self->by_path ) ? $entry->{path} : $entry->{name} ,
       entry => $entry ,
       count => $repo_count++ ,
@@ -257,15 +259,58 @@ sub _expand_arg_list {
   return [
     map {
       s!/$!!;
-      if (/^(\d+)-(\d+)?$/) {
-        ( $1 .. $2 );
-      } else {
-        ($_);
-      }
+      if (/^(\d+)-(\d+)?$/) { ( $1 .. $2 ) }
+      else { ($_) }
     } @$args
   ];
 
   ## use critic
+}
+
+sub _git_status {
+  my ( $self, $entry ) = @_
+    or die "Need entry";
+
+  my( $msg , $verbose_msg ) = $self->_run_git_status( $entry );
+
+  $msg .= $self->_run_git_cherry( $entry )
+    if $entry->current_remote_branch;
+
+  return ( $self->verbose ) ? "$msg$verbose_msg" : $msg;
+}
+
+sub _git_update {
+  my ( $self, $entry ) = @_
+    or die "Need entry";
+
+  my $msg = '';
+
+  my $path = $entry->path;
+
+  if ( !-d $path ) {
+    make_path $path;
+
+    try {
+      $entry->clone( $entry->repo , './' );
+      $msg .= $self->major_change('Checked out');
+    }
+    catch { $msg .= $self->error('ERROR') . "\n$_" };
+  }
+  elsif ( -d "$path/.git" ) {
+    try {
+      my @o = $entry->pull;
+      if ( $o[0] eq 'Already up-to-date.' ) {
+        $msg .= $self->minor_change('Up to date') unless $self->quiet;
+      }
+      else {
+        $msg .= $self->major_change('Updated');
+        $msg .= "\n" . join("\n",@o) unless $self->quiet;
+      }
+    }
+    catch { $msg .= $self->error('ERROR') . "\n$_" };
+  }
+
+  return $msg;
 }
 
 sub _read_config {
@@ -275,173 +320,138 @@ sub _read_config {
 
   if ( -e $file ) {
     try { $config = LoadFile( $file ) }
-      catch { say "Failed to parse config..."; exit };
+    catch { say "Failed to parse config..."; exit };
   }
 
   # if the config is completely empty, bootstrap _something_
   return $config // [ {} ];
 }
 
+sub _run_git_cherry {
+  my( $self , $entry ) = @_;
 
-package App::GitGot::Repo;
-BEGIN {
-  $App::GitGot::Repo::VERSION = '0.9.2';
-}
-BEGIN {
-  $App::GitGot::Repo::AUTHORITY = 'cpan:GENEHACK';
-}
-use Moose;
-use 5.010;
-
-use namespace::autoclean;
-use Git::Wrapper;
-use Try::Tiny;
-
-has 'label' => (
-  is       => 'ro' ,
-  isa      => 'Str' ,
-);
-
-has 'name' => (
-  is          => 'ro',
-  isa         => 'Str',
-  required    => 1 ,
-);
-
-has 'number' => (
-  is          => 'ro',
-  isa         => 'Int',
-  required    => 1 ,
-);
-
-has 'path' => (
-  is          => 'ro',
-  isa         => 'Str',
-  required    => 1 ,
-);
-
-has 'repo' => (
-  is          => 'ro',
-  isa         => 'Str',
-);
-
-has 'tags' => (
-  is          => 'ro',
-  isa         => 'Str',
-);
-
-has 'type' => (
-  is          => 'ro',
-  isa         => 'Str',
-  required    => 1 ,
-);
-
-has '_wrapper' => (
-  is         => 'ro' ,
-  isa        => 'Git::Wrapper' ,
-  lazy_build => 1 ,
-  handles    => [ qw/
-                      cherry
-                      clone
-                      config
-                      pull
-                      remote
-                      status
-                      symbolic_ref
-                    / ] ,
-);
-
-sub _build__wrapper {
-  my $self = shift;
-
-  return Git::Wrapper->new( $self->path )
-    or die "Can't make Git::Wrapper";
-}
-
-sub BUILDARGS {
-  my( $class , $args ) = @_;
-
-  my $count = $args->{count} || 0;
-  my $entry = $args->{entry};
-
-  my $repo = $entry->{repo} //= '';
-
-  $entry->{type} //= '';
-  given( $repo ) {
-    when( /\.git$/ ) { $entry->{type} = 'git' }
-    when( /svn/    ) { $entry->{type} = 'svn' }
-  }
-
-  if ( ! defined $entry->{name} ) {
-    $entry->{name} = ( $repo =~ m|([^/]+).git$| ) ? $1 : '';
-  }
-
-  $entry->{tags} //= '';
-
-  my $return = {
-    number => $count ,
-    name   => $entry->{name} ,
-    path   => $entry->{path} ,
-    repo   => $repo ,
-    type   => $entry->{type} ,
-    tags   => $entry->{tags} ,
-  };
-
-  $return->{label} = $args->{label} if $args->{label};
-
-  return $return;
-}
-
-sub current_branch {
-  my $self = shift;
-
-  my $branch;
+  my $msg = '';
 
   try {
-    my( $branch ) = $self->symbolic_ref( 'HEAD' );
-    $branch =~ s|^refs/heads/||;
-  }
-  catch {
-    die $_ unless $_ && $_->isa('Git::Wrapper::Exception')
-      && $_->error eq "fatal: ref HEAD is not a symbolic ref\n"
-  };
-
-  return $branch;
-}
-
-sub current_remote_branch {
-  my( $self ) = shift;
-
-  my $remote;
-
-  if ( my $branch = $self->current_branch ) {
-    try {
-      ( $remote ) = $self->config( "branch.$branch.remote" );
+    if ( $entry->remote ) {
+      my $cherry = $entry->cherry;
+      if ( $cherry > 0 ) {
+        $msg = $self->major_change("Ahead by $cherry");
+      }
     }
-    catch {
-      ## not the most informative return....
-      return 0 if $_ && $_->isa('Git::Wrapper::Exception') && $_->{status} eq '1';
-    };
   }
+    catch { $msg = $self->error('ERROR') . "\n$_" };
 
-  return $remote;
+  return $msg
 }
 
-sub in_writable_format {
-  my $self = shift;
+sub _run_git_status {
+  my( $self , $entry ) = @_;
 
-  my $writeable = {
-    name => $self->name ,
-    path => $self->path ,
-  };
+  my %types = (
+    indexed  => 'Changes to be committed' ,
+    changed  => 'Changed but not updated' ,
+    unknown  => 'Untracked files' ,
+    conflict => 'Files with conflicts' ,
+  );
 
-  foreach ( qw/ repo tags type /) {
-    $writeable->{$_} = $self->$_ if $self->$_;
+  my( $msg , $verbose_msg ) = ('','');
+
+  try {
+    my $status = $entry->status;
+    if ( keys %$status ) {
+      $msg .= $self->warning('Dirty') . ' ';
+    } else {
+      $msg .= $self->minor_change('OK ') unless $self->quiet;
+    }
+
+    if ( $self->verbose ) {
+    TYPE: for my $type ( keys %types ) {
+        my @states = $status->get( $type ) or next TYPE;
+        $verbose_msg .= "\n** $types{$type}:\n";
+        for ( @states ) {
+          $verbose_msg .= sprintf '  %-12s %s' , $_->mode , $_->from;
+          $verbose_msg .= sprintf ' -> %s' , $_->to if $_->mode eq 'renamed';
+          $verbose_msg .= "\n";
+        }
+      }
+      $verbose_msg = "\n$verbose_msg" if $verbose_msg;
+    }
   }
+    catch { $msg .= $self->error('ERROR') . "\n$_" };
 
-  return $writeable;
+  return( $msg , $verbose_msg );
 }
 
+sub _status {
+  my( $self , @repos ) = @_;
+
+  my $max_len = $self->max_length_of_an_active_repo_label;
+
+ REPO: for my $repo ( @repos ) {
+    my $label = $repo->label;
+
+    my $msg = sprintf "%3d) %-${max_len}s  : ", $repo->number, $label;
+
+    my ( $status, $fxn );
+
+    if ( -d $repo->path ) {
+      given ( $repo->type ) {
+        when ('git') { $fxn = '_git_status' }
+        ### FIXME      when( 'svn' ) { $fxn = 'svn_status' }
+        default {
+          $status = $self->error("ERROR: repo type '$_' not supported");
+        }
+      }
+
+      $status = $self->$fxn($repo) if ($fxn);
+
+      next REPO if $self->quiet and !$status;
+    } elsif ( $repo->repo ) {
+      $status = 'Not checked out';
+    } else {
+      $status = $self->error("ERROR: repo '$label' does not exist");
+    }
+
+    say "$msg$status";
+  }
+}
+
+sub _update {
+  my( $self , @repos ) = @_;
+
+  my $max_len = $self->max_length_of_an_active_repo_label;
+
+ REPO: for my $repo ( @repos ) {
+    next REPO unless $repo->repo;
+
+    my $name = $repo->name;
+
+    my $msg = sprintf "%3d) %-${max_len}s  : ", $repo->number, $repo->label;
+
+    my ( $status, $fxn );
+
+    given ( $repo->type ) {
+      when ('git') { $fxn = '_git_update' }
+      ### FIXME      when( 'svn' ) { $fxn = 'svn_update' }
+      default {
+        $status = $self->error("ERROR: repo type '$_' not supported");
+      }
+    }
+
+    $status = $self->$fxn($repo) if ($fxn);
+
+    next REPO if $self->quiet and !$status;
+
+    say "$msg$status";
+  }
+}
+
+# override this in commands that shouldn't use IO::Page -- i.e., ones that
+# need to do incremental output
+sub _use_io_page { 1 }
+
+__PACKAGE__->meta->make_immutable;
 1;
 
 __END__
@@ -453,7 +463,7 @@ App::GitGot::Command - Base class for App::GitGot commands
 
 =head1 VERSION
 
-version 0.9.2
+version 1.0
 
 =head1 METHODS
 

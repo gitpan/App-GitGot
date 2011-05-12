@@ -1,6 +1,6 @@
 package App::GitGot::Command::add;
 BEGIN {
-  $App::GitGot::Command::add::VERSION = '0.9.2';
+  $App::GitGot::Command::add::VERSION = '1.0';
 }
 BEGIN {
   $App::GitGot::Command::add::AUTHORITY = 'cpan:GENEHACK';
@@ -11,6 +11,7 @@ use Moose;
 extends 'App::GitGot::Command';
 use 5.010;
 
+use App::GitGot::Repo::Git;
 use Config::INI::Reader;
 use Cwd;
 use File::Basename;
@@ -44,8 +45,8 @@ sub _build_new_entry_from_user_input {
     ( $repo, $name, $type ) = _init_for_git();
   }
   else {
-    say "ERROR: Non-git repos not supported at this time.";
-    exit;
+    say STDERR "ERROR: Non-git repos not supported at this time.";
+    exit(1);
   }
 
   if ( $self->defaults ) {
@@ -74,7 +75,7 @@ sub _build_new_entry_from_user_input {
 
   $new_entry->{tags} = $tags if $tags;
 
-  return App::GitGot::Repo->new({ entry => $new_entry });
+  return App::GitGot::Repo::Git->new({ entry => $new_entry });
 }
 
 sub _check_for_dupe_entries {
@@ -82,11 +83,13 @@ sub _check_for_dupe_entries {
 
 REPO: foreach my $entry ( $self->all_repos ) {
     foreach (qw/ name repo type path /) {
-      next REPO unless $entry->$_ and $entry->$_ eq $new_entry->$_;
+      if ( $new_entry->$_ ) {
+        next REPO unless $entry->$_ and $entry->$_ eq $new_entry->$_;
+      }
     }
-    say
+    say STDERR
 "ERROR: Not adding entry for '$entry->{name}'; exact duplicate already exists.";
-    exit;
+    exit(1);
   }
 }
 
@@ -107,6 +110,7 @@ sub _init_for_git {
   return ( $repo, $name, $type );
 }
 
+__PACKAGE__->meta->make_immutable;
 1;
 
 __END__
@@ -118,7 +122,7 @@ App::GitGot::Command::add - add a new repo to your config
 
 =head1 VERSION
 
-version 0.9.2
+version 1.0
 
 =head1 AUTHOR
 

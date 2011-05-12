@@ -1,6 +1,6 @@
 package App::GitGot;
 BEGIN {
-  $App::GitGot::VERSION = '0.9.2';
+  $App::GitGot::VERSION = '1.0';
 }
 BEGIN {
   $App::GitGot::AUTHORITY = 'cpan:GENEHACK';
@@ -10,6 +10,7 @@ extends 'MooseX::App::Cmd';
 # ABSTRACT: A tool to make it easier to manage multiple git repositories.
 
 
+__PACKAGE__->meta->make_immutable;
 1;
 
 __END__
@@ -21,7 +22,7 @@ App::GitGot - A tool to make it easier to manage multiple git repositories.
 
 =head1 VERSION
 
-version 0.9.2
+version 1.0
 
 =head1 SYNOPSIS
 

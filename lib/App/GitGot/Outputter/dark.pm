@@ -1,6 +1,6 @@
 package App::GitGot::Outputter::dark;
 BEGIN {
-  $App::GitGot::Outputter::dark::VERSION = '0.9.2';
+  $App::GitGot::Outputter::dark::VERSION = '1.0';
 }
 BEGIN {
   $App::GitGot::Outputter::dark::AUTHORITY = 'cpan:GENEHACK';
@@ -20,7 +20,7 @@ has 'color_error' => (
 has 'color_warning' => (
   is      => 'ro' ,
   isa     => 'Str' ,
-  default => 'bold black on_bright_yellow'
+  default => 'bold black on_yellow'
 );
 
 has 'color_major_change' => (
@@ -36,6 +36,7 @@ has 'color_minor_change' => (
 );
 
 __PACKAGE__->meta->make_immutable;
+1;
 
 __END__
 =pod
@@ -46,7 +47,7 @@ App::GitGot::Outputter::dark - Color scheme appropriate for dark terminal backgr
 
 =head1 VERSION
 
-version 0.9.2
+version 1.0
 
 =head1 AUTHOR
 
