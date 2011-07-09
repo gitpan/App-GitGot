@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-BEGIN { require 5.010; }
+use 5.010;
 
 use ExtUtils::MakeMaker 6.30;
 
@@ -41,7 +41,7 @@ my %WriteMakefileArgs = (
     'File::Slurp' => '0',
     'File::Spec' => '0',
     'FindBin' => '0',
-    'Git::Wrapper' => '0',
+    'Git::Wrapper' => '0.014',
     'List::MoreUtils' => '0',
     'List::Util' => '0',
     'Moose' => '0',
@@ -57,7 +57,7 @@ my %WriteMakefileArgs = (
     'autodie' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '1.0',
+  'VERSION' => '1.01',
   'test' => {
     'TESTS' => 't/*.t'
   }

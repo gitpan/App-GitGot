@@ -1,6 +1,6 @@
 package App::GitGot::Command::version;
 BEGIN {
-  $App::GitGot::Command::version::VERSION = '1.0';
+  $App::GitGot::Command::version::VERSION = '1.01';
 }
 BEGIN {
   $App::GitGot::Command::version::AUTHORITY = 'cpan:GENEHACK';
@@ -25,7 +25,7 @@ App::GitGot::Command::version - display application version
 
 =head1 VERSION
 
-version 1.0
+version 1.01
 
 =head1 AUTHOR
 

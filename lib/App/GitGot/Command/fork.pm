@@ -1,6 +1,6 @@
 package App::GitGot::Command::fork;
 BEGIN {
-  $App::GitGot::Command::fork::VERSION = '1.0';
+  $App::GitGot::Command::fork::VERSION = '1.01';
 }
 BEGIN {
   $App::GitGot::Command::fork::AUTHORITY = 'cpan:GENEHACK';
@@ -88,7 +88,7 @@ App::GitGot::Command::fork - fork a github repo
 
 =head1 VERSION
 
-version 1.0
+version 1.01
 
 =head1 AUTHOR
 
