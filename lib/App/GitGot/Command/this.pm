@@ -1,24 +1,37 @@
-package App::GitGot::Command::list;
+package App::GitGot::Command::this;
 {
-  $App::GitGot::Command::list::VERSION = '1.02';
+  $App::GitGot::Command::this::VERSION = '1.02';
 }
 BEGIN {
-  $App::GitGot::Command::list::AUTHORITY = 'cpan:GENEHACK';
+  $App::GitGot::Command::this::AUTHORITY = 'cpan:GENEHACK';
 }
-# ABSTRACT: list managed repositories
+# ABSTRACT: check if the current repository is managed
 
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
 
-sub command_names { qw/ list ls / }
+use Cwd;
+use Path::Class;
+
+sub command_names { qw/ this / }
 
 sub _execute {
   my( $self, $opt, $args ) = @_;
 
+  my $dir = dir( getcwd );
+
+  # find repo root
+  while ( ! grep { -d and $_->basename eq '.git' } $dir->children ) {
+      die "you don't seem to be in a git directory\n" if $dir eq $dir->parent;
+      $dir = $dir->parent;
+  }
+
   my $max_len = $self->max_length_of_an_active_repo_label;
 
   for my $repo ( $self->active_repos ) {
+    next unless $repo->path eq $dir->absolute;
+
     my $repo_remote = ( $repo->repo and -d $repo->path ) ? $repo->repo
       : ( $repo->repo )    ? $repo->repo . ' (Not checked out)'
       : ( -d $repo->path ) ? 'NO REMOTE'
@@ -34,18 +47,23 @@ sub _execute {
         printf "    tags: %s\n" , $repo->tags if $repo->tags;
       }
     }
+
+    return;
   }
+
+  say "repository not in Got list";
 }
 
 __PACKAGE__->meta->make_immutable;
 1;
+
 
 __END__
 =pod
 
 =head1 NAME
 
-App::GitGot::Command::list - list managed repositories
+App::GitGot::Command::this - check if the current repository is managed
 
 =head1 VERSION
 

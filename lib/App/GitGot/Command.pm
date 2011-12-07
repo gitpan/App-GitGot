@@ -1,14 +1,14 @@
 package App::GitGot::Command;
-BEGIN {
-  $App::GitGot::Command::VERSION = '1.01';
+{
+  $App::GitGot::Command::VERSION = '1.02';
 }
 BEGIN {
   $App::GitGot::Command::AUTHORITY = 'cpan:GENEHACK';
 }
 # ABSTRACT: Base class for App::GitGot commands
 
-use Moose;
-extends 'MooseX::App::Cmd::Command';
+use Mouse;
+extends 'MouseX::App::Cmd::Command';
 use 5.010;
 
 use App::GitGot::Repo::Git;
@@ -463,7 +463,7 @@ App::GitGot::Command - Base class for App::GitGot commands
 
 =head1 VERSION
 
-version 1.01
+version 1.02
 
 =head1 METHODS
 

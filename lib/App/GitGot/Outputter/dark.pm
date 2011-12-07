@@ -1,13 +1,13 @@
 package App::GitGot::Outputter::dark;
-BEGIN {
-  $App::GitGot::Outputter::dark::VERSION = '1.01';
+{
+  $App::GitGot::Outputter::dark::VERSION = '1.02';
 }
 BEGIN {
   $App::GitGot::Outputter::dark::AUTHORITY = 'cpan:GENEHACK';
 }
 # ABSTRACT: Color scheme appropriate for dark terminal backgrounds
 
-use Moose;
+use Mouse;
 extends 'App::GitGot::Outputter';
 use 5.010;
 
@@ -47,7 +47,7 @@ App::GitGot::Outputter::dark - Color scheme appropriate for dark terminal backgr
 
 =head1 VERSION
 
-version 1.01
+version 1.02
 
 =head1 AUTHOR
 

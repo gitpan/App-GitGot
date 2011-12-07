@@ -19,6 +19,7 @@ lib/App/GitGot/Command/list.pm
 lib/App/GitGot/Command/push.pm
 lib/App/GitGot/Command/remove.pm
 lib/App/GitGot/Command/status.pm
+lib/App/GitGot/Command/this.pm
 lib/App/GitGot/Command/update.pm
 lib/App/GitGot/Command/update_status.pm
 lib/App/GitGot/Command/version.pm

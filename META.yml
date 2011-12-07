@@ -11,12 +11,13 @@ build_requires:
   Test::Class::Load: 0
   Test::Exception: 0
   Test::File: 0
+  Test::Kwalitee: 0
   Test::More: 0
   parent: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.200009, CPAN::Meta::Converter version 2.110930'
+generated_by: 'Dist::Zilla version 4.300003, CPAN::Meta::Converter version 2.112621'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -36,10 +37,12 @@ requires:
   Git::Wrapper: 0.014
   List::MoreUtils: 0
   List::Util: 0
-  Moose: 0
-  MooseX::App::Cmd: 0
-  MooseX::App::Cmd::Command: 0
+  Mouse: 0
+  MouseX::App::Cmd: 0
+  MouseX::App::Cmd::Command: 0
+  MouseX::NativeTraits: 0
   Net::GitHub::V2::Repositories: 0
+  Path::Class: 0
   Term::ANSIColor: 0
   Term::ReadLine: 0
   Term::ReadLine::Perl: 0
@@ -49,181 +52,179 @@ requires:
   autodie: 0
   namespace::autoclean: 0
   perl: 5.010
+  strict: 0
+  warnings: 0
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=App-GitGot
   homepage: http://search.cpan.org/dist/App-GitGot/
   repository: git://github.com/genehack/app-gitgot.git
-version: 1.01
+version: 1.02
 x_Dist_Zilla:
   plugins:
     -
       class: Dist::Zilla::Plugin::Git::Check
-      name: '@GENEHACK/@Git/Check'
-      version: 1.111590
+      name: '@Filter/@Git/Check'
+      version: 1.113220
     -
       class: Dist::Zilla::Plugin::Git::Commit
-      name: '@GENEHACK/@Git/Commit'
-      version: 1.111590
+      name: '@Filter/@Git/Commit'
+      version: 1.113220
     -
       class: Dist::Zilla::Plugin::Git::Tag
-      name: '@GENEHACK/@Git/Tag'
-      version: 1.111590
+      name: '@Filter/@Git/Tag'
+      version: 1.113220
     -
       class: Dist::Zilla::Plugin::Git::Push
-      name: '@GENEHACK/@Git/Push'
-      version: 1.111590
+      name: '@Filter/@Git/Push'
+      version: 1.113220
     -
       class: Dist::Zilla::Plugin::Git::NextVersion
-      name: '@GENEHACK/Git::NextVersion'
-      version: 1.111590
+      name: '@Filter/Git::NextVersion'
+      version: 1.113220
     -
       class: Dist::Zilla::Plugin::GatherDir
-      name: '@GENEHACK/@Basic/GatherDir'
-      version: 4.200009
+      name: '@Filter/@Basic/GatherDir'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::PruneCruft
-      name: '@GENEHACK/@Basic/PruneCruft'
-      version: 4.200009
+      name: '@Filter/@Basic/PruneCruft'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::ManifestSkip
-      name: '@GENEHACK/@Basic/ManifestSkip'
-      version: 4.200009
+      name: '@Filter/@Basic/ManifestSkip'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::MetaYAML
-      name: '@GENEHACK/@Basic/MetaYAML'
-      version: 4.200009
+      name: '@Filter/@Basic/MetaYAML'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::License
-      name: '@GENEHACK/@Basic/License'
-      version: 4.200009
+      name: '@Filter/@Basic/License'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::Readme
-      name: '@GENEHACK/@Basic/Readme'
-      version: 4.200009
+      name: '@Filter/@Basic/Readme'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::ExtraTests
-      name: '@GENEHACK/@Basic/ExtraTests'
-      version: 4.200009
+      name: '@Filter/@Basic/ExtraTests'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::ExecDir
-      name: '@GENEHACK/@Basic/ExecDir'
-      version: 4.200009
+      name: '@Filter/@Basic/ExecDir'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::ShareDir
-      name: '@GENEHACK/@Basic/ShareDir'
-      version: 4.200009
+      name: '@Filter/@Basic/ShareDir'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::MakeMaker
-      name: '@GENEHACK/@Basic/MakeMaker'
-      version: 4.200009
+      name: '@Filter/@Basic/MakeMaker'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::Manifest
-      name: '@GENEHACK/@Basic/Manifest'
-      version: 4.200009
+      name: '@Filter/@Basic/Manifest'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::TestRelease
-      name: '@GENEHACK/@Basic/TestRelease'
-      version: 4.200009
+      name: '@Filter/@Basic/TestRelease'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::ConfirmRelease
-      name: '@GENEHACK/@Basic/ConfirmRelease'
-      version: 4.200009
+      name: '@Filter/@Basic/ConfirmRelease'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::UploadToCPAN
-      name: '@GENEHACK/@Basic/UploadToCPAN'
-      version: 4.200009
+      name: '@Filter/@Basic/UploadToCPAN'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::AutoPrereqs
-      name: '@GENEHACK/AutoPrereqs'
-      version: 4.200009
+      name: '@Filter/AutoPrereqs'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::CheckChangesHasContent
-      name: '@GENEHACK/CheckChangesHasContent'
+      name: '@Filter/CheckChangesHasContent'
       version: 0.003
     -
       class: Dist::Zilla::Plugin::Authority
-      name: '@GENEHACK/Authority'
+      name: '@Filter/Authority'
       version: 1.005
     -
       class: Dist::Zilla::Plugin::MinimumPerl
-      name: '@GENEHACK/MinimumPerl'
+      name: '@Filter/MinimumPerl'
       version: 1.003
     -
       class: Dist::Zilla::Plugin::PkgVersion
-      name: '@GENEHACK/PkgVersion'
-      version: 4.200009
+      name: '@Filter/PkgVersion'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::PodWeaver
-      name: '@GENEHACK/PodWeaver'
+      name: '@Filter/PodWeaver'
       version: 3.101641
     -
       class: Dist::Zilla::Plugin::Bugtracker
-      name: '@GENEHACK/Bugtracker'
+      name: '@Filter/Bugtracker'
       version: 1.111080
     -
       class: Dist::Zilla::Plugin::Homepage
-      name: '@GENEHACK/Homepage'
+      name: '@Filter/Homepage'
       version: 1.101420
     -
       class: Dist::Zilla::Plugin::MetaConfig
-      name: '@GENEHACK/MetaConfig'
-      version: 4.200009
+      name: '@Filter/MetaConfig'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::MetaJSON
-      name: '@GENEHACK/MetaJSON'
-      version: 4.200009
+      name: '@Filter/MetaJSON'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::Repository
-      name: '@GENEHACK/Repository'
+      name: '@Filter/Repository'
       version: 0.18
     -
       class: Dist::Zilla::Plugin::InstallGuide
-      name: '@GENEHACK/InstallGuide'
+      name: '@Filter/InstallGuide'
       version: 1.101461
     -
       class: Dist::Zilla::Plugin::ReadmeFromPod
-      name: '@GENEHACK/ReadmeFromPod'
+      name: '@Filter/ReadmeFromPod'
       version: 0.14
     -
       class: Dist::Zilla::Plugin::NextRelease
-      name: '@GENEHACK/NextRelease'
-      version: 4.200009
+      name: '@Filter/NextRelease'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::ExtraTests
-      name: '@GENEHACK/ExtraTests'
-      version: 4.200009
+      name: '@Filter/ExtraTests'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::PodCoverageTests
-      name: '@GENEHACK/PodCoverageTests'
-      version: 4.200009
+      name: '@Filter/PodCoverageTests'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::PodSyntaxTests
-      name: '@GENEHACK/PodSyntaxTests'
-      version: 4.200009
-    -
-      class: Dist::Zilla::Plugin::CompileTests
-      name: '@GENEHACK/CompileTests'
-      version: 1.110930
+      name: '@Filter/PodSyntaxTests'
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::EOLTests
-      name: '@GENEHACK/EOLTests'
+      name: '@Filter/EOLTests'
       version: 0.02
     -
-      class: Dist::Zilla::Plugin::KwaliteeTests
-      name: '@GENEHACK/KwaliteeTests'
-      version: 1.101420
+      class: Dist::Zilla::Plugin::Test::Compile
+      name: '@Filter/Test::Compile'
+      version: 1.112820
     -
       class: Dist::Zilla::Plugin::Twitter
-      name: '@GENEHACK/Twitter'
-      version: 0.010
+      name: '@Filter/Twitter'
+      version: 0.013
     -
       class: Dist::Zilla::Plugin::InstallRelease
-      name: '@GENEHACK/InstallRelease'
+      name: '@Filter/InstallRelease'
       version: 0.007
     -
       class: Dist::Zilla::Plugin::ArchiveRelease
-      name: '@GENEHACK/ArchiveRelease'
-      version: 3.01
+      name: '@Filter/ArchiveRelease'
+      version: 4.00
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -231,7 +232,7 @@ x_Dist_Zilla:
           phase: runtime
           type: requires
       name: Prereqs
-      version: 4.200009
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -239,34 +240,38 @@ x_Dist_Zilla:
           phase: runtime
           type: recommends
       name: RuntimeRecommends
-      version: 4.200009
+      version: 4.300003
+    -
+      class: Dist::Zilla::Plugin::Test::Kwalitee
+      name: Test::Kwalitee
+      version: 2.03
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'
-      version: 4.200009
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':IncModules'
-      version: 4.200009
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':TestFiles'
-      version: 4.200009
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ExecFiles'
-      version: 4.200009
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ShareFiles'
-      version: 4.200009
+      version: 4.300003
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':MainModule'
-      version: 4.200009
+      version: 4.300003
   zilla:
     class: Dist::Zilla::Dist::Builder
     config:
       is_trial: 0
-    version: 4.200009
+    version: 4.300003
 x_authority: cpan:GENEHACK

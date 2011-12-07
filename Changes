@@ -1,6 +1,16 @@
 Changes file for App-GitGot
 
+1.02      2011-12-07 09:36:01 America/New_York
+
+  [ENHANCEMENTS]
+
+  * Add 'this' command to show if current repo is known to got (Yanick)
+  * Add '--origin' option for 'add' command (Yanick)
+  * Convert to MouseX::App::Cmd. (Thanks to Ingy for pointing that
+    this module exists...)
+
 1.01      2011-07-08 21:42:32 America/New_York
+
   [BUGFIX]
 
   * Add specific dep on Git::Wrapper version. (RT#69342)

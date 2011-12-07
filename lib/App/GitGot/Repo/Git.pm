@@ -1,12 +1,12 @@
 package App::GitGot::Repo::Git;
-BEGIN {
-  $App::GitGot::Repo::Git::VERSION = '1.01';
+{
+  $App::GitGot::Repo::Git::VERSION = '1.02';
 }
 BEGIN {
   $App::GitGot::Repo::Git::AUTHORITY = 'cpan:GENEHACK';
 }
 # ABSTRACT: Git repo objects
-use Moose;
+use Mouse;
 extends 'App::GitGot::Repo';
 use 5.010;
 
@@ -46,8 +46,8 @@ sub _build__wrapper {
       $mock->mock( $method => sub { return( '1' )});
     }
     $mock->mock( 'status' => sub { package MyFake;
-BEGIN {
-  $MyFake::VERSION = '1.01';
+{
+  $MyFake::VERSION = '1.02';
 }
 BEGIN {
   $MyFake::AUTHORITY = 'cpan:GENEHACK';
@@ -110,7 +110,7 @@ App::GitGot::Repo::Git - Git repo objects
 
 =head1 VERSION
 
-version 1.01
+version 1.02
 
 =head1 METHODS
 

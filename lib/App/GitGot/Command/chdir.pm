@@ -1,13 +1,13 @@
 package App::GitGot::Command::chdir;
-BEGIN {
-  $App::GitGot::Command::chdir::VERSION = '1.01';
+{
+  $App::GitGot::Command::chdir::VERSION = '1.02';
 }
 BEGIN {
   $App::GitGot::Command::chdir::AUTHORITY = 'cpan:GENEHACK';
 }
 # ABSTRACT: open a subshell in a selected project
 
-use Moose;
+use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
 
@@ -41,7 +41,7 @@ App::GitGot::Command::chdir - open a subshell in a selected project
 
 =head1 VERSION
 
-version 1.01
+version 1.02
 
 =head1 AUTHOR
 

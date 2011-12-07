@@ -1,12 +1,12 @@
 package App::GitGot;
-BEGIN {
-  $App::GitGot::VERSION = '1.01';
+{
+  $App::GitGot::VERSION = '1.02';
 }
 BEGIN {
   $App::GitGot::AUTHORITY = 'cpan:GENEHACK';
 }
-use Moose;
-extends 'MooseX::App::Cmd';
+use Mouse;
+extends 'MouseX::App::Cmd';
 # ABSTRACT: A tool to make it easier to manage multiple git repositories.
 
 
@@ -22,7 +22,7 @@ App::GitGot - A tool to make it easier to manage multiple git repositories.
 
 =head1 VERSION
 
-version 1.01
+version 1.02
 
 =head1 SYNOPSIS
 

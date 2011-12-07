@@ -1,13 +1,13 @@
 package App::GitGot::Command::fork;
-BEGIN {
-  $App::GitGot::Command::fork::VERSION = '1.01';
+{
+  $App::GitGot::Command::fork::VERSION = '1.02';
 }
 BEGIN {
   $App::GitGot::Command::fork::AUTHORITY = 'cpan:GENEHACK';
 }
 # ABSTRACT: fork a github repo
 
-use Moose;
+use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
 
@@ -88,7 +88,7 @@ App::GitGot::Command::fork - fork a github repo
 
 =head1 VERSION
 
-version 1.01
+version 1.02
 
 =head1 AUTHOR
 

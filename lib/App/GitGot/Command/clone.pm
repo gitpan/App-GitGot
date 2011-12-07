@@ -1,13 +1,13 @@
 package App::GitGot::Command::clone;
-BEGIN {
-  $App::GitGot::Command::clone::VERSION = '1.01';
+{
+  $App::GitGot::Command::clone::VERSION = '1.02';
 }
 BEGIN {
   $App::GitGot::Command::clone::AUTHORITY = 'cpan:GENEHACK';
 }
 # ABSTRACT: clone a remote repo and add it to your config
 
-use Moose;
+use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
 
@@ -75,7 +75,7 @@ App::GitGot::Command::clone - clone a remote repo and add it to your config
 
 =head1 VERSION
 
-version 1.01
+version 1.02
 
 =head1 AUTHOR
 

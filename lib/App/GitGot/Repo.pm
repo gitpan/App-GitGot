@@ -1,12 +1,12 @@
 package App::GitGot::Repo;
-BEGIN {
-  $App::GitGot::Repo::VERSION = '1.01';
+{
+  $App::GitGot::Repo::VERSION = '1.02';
 }
 BEGIN {
   $App::GitGot::Repo::AUTHORITY = 'cpan:GENEHACK';
 }
 # ABSTRACT: Base repository objects
-use Moose;
+use Mouse;
 use 5.010;
 
 use namespace::autoclean;
@@ -109,7 +109,7 @@ App::GitGot::Repo - Base repository objects
 
 =head1 VERSION
 
-version 1.01
+version 1.02
 
 =head1 METHODS
 

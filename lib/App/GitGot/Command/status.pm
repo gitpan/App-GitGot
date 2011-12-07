@@ -1,13 +1,13 @@
 package App::GitGot::Command::status;
-BEGIN {
-  $App::GitGot::Command::status::VERSION = '1.01';
+{
+  $App::GitGot::Command::status::VERSION = '1.02';
 }
 BEGIN {
   $App::GitGot::Command::status::AUTHORITY = 'cpan:GENEHACK';
 }
 # ABSTRACT: print status info about repos
 
-use Moose;
+use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
 
@@ -31,7 +31,7 @@ App::GitGot::Command::status - print status info about repos
 
 =head1 VERSION
 
-version 1.01
+version 1.02
 
 =head1 AUTHOR
 

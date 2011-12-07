@@ -1,13 +1,13 @@
 package App::GitGot::Command::gc;
-BEGIN {
-  $App::GitGot::Command::gc::VERSION = '1.01';
+{
+  $App::GitGot::Command::gc::VERSION = '1.02';
 }
 BEGIN {
   $App::GitGot::Command::gc::AUTHORITY = 'cpan:GENEHACK';
 }
 # ABSTRACT: Run the 'gc' command to garbage collect in git repos
 
-use Moose;
+use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
 
@@ -50,7 +50,7 @@ App::GitGot::Command::gc - Run the 'gc' command to garbage collect in git repos
 
 =head1 VERSION
 
-version 1.01
+version 1.02
 
 =head1 AUTHOR
 

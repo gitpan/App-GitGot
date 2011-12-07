@@ -1,13 +1,13 @@
 package App::GitGot::Command::add;
-BEGIN {
-  $App::GitGot::Command::add::VERSION = '1.01';
+{
+  $App::GitGot::Command::add::VERSION = '1.02';
 }
 BEGIN {
   $App::GitGot::Command::add::AUTHORITY = 'cpan:GENEHACK';
 }
 # ABSTRACT: add a new repo to your config
 
-use Moose;
+use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
 
@@ -21,6 +21,14 @@ has 'defaults' => (
   is          => 'rw',
   isa         => 'Bool',
   cmd_aliases => 'D',
+  traits      => [qw/ Getopt /],
+);
+
+has 'origin' => (
+  is          => 'rw',
+  isa         => 'Str',
+  cmd_aliases => 'o',
+  default     => 'origin',
   traits      => [qw/ Getopt /],
 );
 
@@ -42,7 +50,7 @@ sub _build_new_entry_from_user_input {
   my ( $repo, $name, $type, $tags, $path );
 
   if ( -e '.git' ) {
-    ( $repo, $name, $type ) = _init_for_git();
+    ( $repo, $name, $type ) = $self->_init_for_git;
   }
   else {
     say STDERR "ERROR: Non-git repos not supported at this time.";
@@ -94,20 +102,18 @@ REPO: foreach my $entry ( $self->all_repos ) {
 }
 
 sub _init_for_git {
-  my ( $repo, $name, $type );
+  my $self = shift;
 
   my $cfg = Config::INI::Reader->read_file('.git/config');
 
-  if ( $cfg->{'remote "origin"'}{url} ) {
-    $repo = $cfg->{'remote "origin"'}{url};
-    if ( $repo =~ m|([^/]+).git$| ) {
-      $name = $1;
-    }
-  }
+  my $remote = sprintf 'remote "%s"', $self->origin;
 
-  $type = 'git';
+  no warnings qw/ uninitialized /;
 
-  return ( $repo, $name, $type );
+  my $repo = $cfg->{$remote}{url};
+  my ( $name ) = $repo =~ m|([^/]+).git$|;
+
+  return ( $repo, $name, 'git' );
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -122,7 +128,7 @@ App::GitGot::Command::add - add a new repo to your config
 
 =head1 VERSION
 
-version 1.01
+version 1.02
 
 =head1 AUTHOR
 

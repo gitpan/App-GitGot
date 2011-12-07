@@ -1,13 +1,13 @@
 package App::GitGot::Command::push;
-BEGIN {
-  $App::GitGot::Command::push::VERSION = '1.01';
+{
+  $App::GitGot::Command::push::VERSION = '1.02';
 }
 BEGIN {
   $App::GitGot::Command::push::AUTHORITY = 'cpan:GENEHACK';
 }
 # ABSTRACT: Push local changes to the default remote in git repos
 
-use Moose;
+use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
 
@@ -57,7 +57,7 @@ App::GitGot::Command::push - Push local changes to the default remote in git rep
 
 =head1 VERSION
 
-version 1.01
+version 1.02
 
 =head1 AUTHOR
 
