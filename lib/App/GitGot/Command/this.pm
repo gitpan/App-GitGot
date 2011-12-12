@@ -1,6 +1,6 @@
 package App::GitGot::Command::this;
 {
-  $App::GitGot::Command::this::VERSION = '1.02';
+  $App::GitGot::Command::this::VERSION = '1.03';
 }
 BEGIN {
   $App::GitGot::Command::this::AUTHORITY = 'cpan:GENEHACK';
@@ -67,7 +67,7 @@ App::GitGot::Command::this - check if the current repository is managed
 
 =head1 VERSION
 
-version 1.02
+version 1.03
 
 =head1 AUTHOR
 

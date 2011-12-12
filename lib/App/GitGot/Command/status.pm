@@ -1,6 +1,6 @@
 package App::GitGot::Command::status;
 {
-  $App::GitGot::Command::status::VERSION = '1.02';
+  $App::GitGot::Command::status::VERSION = '1.03';
 }
 BEGIN {
   $App::GitGot::Command::status::AUTHORITY = 'cpan:GENEHACK';
@@ -31,7 +31,7 @@ App::GitGot::Command::status - print status info about repos
 
 =head1 VERSION
 
-version 1.02
+version 1.03
 
 =head1 AUTHOR
 
