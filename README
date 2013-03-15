@@ -1,19 +1,13 @@
-NAME
-    App::GitGot - A tool to make it easier to manage multiple git
-    repositories.
 
-VERSION
-    version 1.04
 
-SYNOPSIS
-    See "perldoc got" for usage information.
+This archive contains the distribution App-GitGot,
+version 1.05:
 
-AUTHOR
-    John SJ Anderson <genehack@genehack.org>
+  A tool to make it easier to manage multiple code repositories using different VCSen
 
-COPYRIGHT AND LICENSE
-    This software is copyright (c) 2010 by John SJ Anderson.
+This software is copyright (c) 2013 by John SJ Anderson.
 
-    This is free software; you can redistribute it and/or modify it under
-    the same terms as the Perl 5 programming language system itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
 

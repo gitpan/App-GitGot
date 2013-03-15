@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "A tool to make it easier to manage multiple git repositories.",
+  "ABSTRACT" => "A tool to make it easier to manage multiple code repositories using different VCSen",
   "AUTHOR" => "John SJ Anderson <genehack\@genehack.org>",
   "BUILD_REQUIRES" => {
     "App::Cmd::Tester" => 0,
@@ -20,7 +20,6 @@ my %WriteMakefileArgs = (
     "Test::Class::Load" => 0,
     "Test::Exception" => 0,
     "Test::File" => 0,
-    "Test::Kwalitee" => 0,
     "Test::More" => 0,
     "parent" => 0
   },
@@ -29,7 +28,8 @@ my %WriteMakefileArgs = (
   },
   "DISTNAME" => "App-GitGot",
   "EXE_FILES" => [
-    "bin/got"
+    "bin/got",
+    "bin/got-complete"
   ],
   "LICENSE" => "perl",
   "NAME" => "App::GitGot",
@@ -57,12 +57,13 @@ my %WriteMakefileArgs = (
     "Test::MockObject" => 0,
     "Try::Tiny" => 0,
     "YAML" => 0,
+    "YAML::Any" => 0,
     "autodie" => 0,
     "namespace::autoclean" => 0,
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "1.04",
+  "VERSION" => "1.05",
   "test" => {
     "TESTS" => "t/*.t"
   }

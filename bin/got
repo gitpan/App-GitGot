@@ -13,6 +13,7 @@ use App::GitGot;
 App::GitGot->run;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -21,7 +22,7 @@ got - A tool to make it easier to manage multiple code repositories using differ
 
 =head1 VERSION
 
-version 1.04
+version 1.05
 
 =head1 SYNOPSIS
 
@@ -80,6 +81,11 @@ version 1.04
     # fork a subshell with working directory set to 'path' of repo foo
     got cd foo
 
+    # or use 'tmux' subcommand to open a new tmux window instead
+    got tmux 1
+    got tmux foo
+    # N.b., 'tmux' will reuse an existing window if one is open
+
     # show version of got
     got version
 
@@ -92,6 +98,8 @@ date, pending changes, dirty, etc.) and sync it with any upstream master.
 
 got also supports forking a GitHub repo and adding it to the list of managed
 repositories.
+
+=encoding UTF-8
 
 =head1 OPTIONS
 
@@ -179,16 +187,23 @@ sent me.
 
 Currently git is the only supported VCS.
 
+=head1 CONTRIBUTORS
+
+=over
+
+=item Yanick Champoux <yanick@babyl.dyndns.org>
+
+=back
+
 =head1 AUTHOR
 
 John SJ Anderson <genehack@genehack.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2010 by John SJ Anderson.
+This software is copyright (c) 2013 by John SJ Anderson.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

@@ -1,17 +1,17 @@
-package App::GitGot::Command::chdir;
+package App::GitGot::Command::mux;
 {
-  $App::GitGot::Command::chdir::VERSION = '1.05';
+  $App::GitGot::Command::mux::VERSION = '1.05';
 }
 BEGIN {
-  $App::GitGot::Command::chdir::AUTHORITY = 'cpan:GENEHACK';
+  $App::GitGot::Command::mux::AUTHORITY = 'cpan:GENEHACK';
 }
-# ABSTRACT: open a subshell in a selected project
+# ABSTRACT: open a tmux window for a selected project
 
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
 
-sub command_names { qw/ chdir cd / }
+sub command_names { qw/ mux tmux / }
 
 sub _execute {
   my( $self, $opt, $args ) = @_;
@@ -23,10 +23,17 @@ sub _execute {
 
   my( $repo ) = $self->active_repos;
 
-  chdir $repo->path
-    or say STDERR "ERROR: Failed to chdir to repo ($!)" and exit(1);
+  # is it already opened?
+  my %windows = reverse map { /^(\d+):\s+(\S+)/ }
+    split "\n", `tmux list-windows`;
 
-  exec $ENV{SHELL};
+  if( my $window = $windows{$repo->name} ) {
+      exec 'tmux', 'select-window', '-t' => $window;
+  }
+
+  chdir $repo->path;
+
+  exec 'tmux', 'new-window', '-n', $repo->name;
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -38,7 +45,7 @@ __END__
 
 =head1 NAME
 
-App::GitGot::Command::chdir - open a subshell in a selected project
+App::GitGot::Command::mux - open a tmux window for a selected project
 
 =head1 VERSION
 
