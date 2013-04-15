@@ -18,6 +18,7 @@ lib/App/GitGot/Command/clone.pm
 lib/App/GitGot/Command/fork.pm
 lib/App/GitGot/Command/gc.pm
 lib/App/GitGot/Command/list.pm
+lib/App/GitGot/Command/move.pm
 lib/App/GitGot/Command/mux.pm
 lib/App/GitGot/Command/push.pm
 lib/App/GitGot/Command/remove.pm

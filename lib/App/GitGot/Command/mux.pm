@@ -1,6 +1,6 @@
 package App::GitGot::Command::mux;
 {
-  $App::GitGot::Command::mux::VERSION = '1.05';
+  $App::GitGot::Command::mux::VERSION = '1.06';
 }
 BEGIN {
   $App::GitGot::Command::mux::AUTHORITY = 'cpan:GENEHACK';
@@ -24,8 +24,8 @@ sub _execute {
   my( $repo ) = $self->active_repos;
 
   # is it already opened?
-  my %windows = reverse map { /^(\d+):\s+(\S+)/ }
-    split "\n", `tmux list-windows`;
+  my %windows = reverse map { /^(\d+):::(\S+)/ }
+    split "\n", `tmux list-windows -F"#I:::#W"`;
 
   if( my $window = $windows{$repo->name} ) {
       exec 'tmux', 'select-window', '-t' => $window;
@@ -49,7 +49,7 @@ App::GitGot::Command::mux - open a tmux window for a selected project
 
 =head1 VERSION
 
-version 1.05
+version 1.06
 
 =head1 AUTHOR
 
