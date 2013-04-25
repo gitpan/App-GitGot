@@ -1,6 +1,6 @@
 package App::GitGot;
 {
-  $App::GitGot::VERSION = '1.06';
+  $App::GitGot::VERSION = '1.07';
 }
 BEGIN {
   $App::GitGot::AUTHORITY = 'cpan:GENEHACK';
@@ -23,7 +23,7 @@ App::GitGot - A tool to make it easier to manage multiple git repositories.
 
 =head1 VERSION
 
-version 1.06
+version 1.07
 
 =head1 SYNOPSIS
 

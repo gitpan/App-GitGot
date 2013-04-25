@@ -91,7 +91,7 @@
          "web" : "https://github.com/genehack/app-gitgot"
       }
    },
-   "version" : "1.06",
+   "version" : "1.07",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.016003"

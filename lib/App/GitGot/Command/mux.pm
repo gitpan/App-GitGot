@@ -1,6 +1,6 @@
 package App::GitGot::Command::mux;
 {
-  $App::GitGot::Command::mux::VERSION = '1.06';
+  $App::GitGot::Command::mux::VERSION = '1.07';
 }
 BEGIN {
   $App::GitGot::Command::mux::AUTHORITY = 'cpan:GENEHACK';
@@ -49,7 +49,7 @@ App::GitGot::Command::mux - open a tmux window for a selected project
 
 =head1 VERSION
 
-version 1.06
+version 1.07
 
 =head1 AUTHOR
 
