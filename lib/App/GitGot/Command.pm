@@ -1,6 +1,6 @@
 package App::GitGot::Command;
 {
-  $App::GitGot::Command::VERSION = '1.07';
+  $App::GitGot::Command::VERSION = '1.08';
 }
 BEGIN {
   $App::GitGot::Command::AUTHORITY = 'cpan:GENEHACK';
@@ -396,22 +396,17 @@ sub _status {
     my ( $status, $fxn );
 
     if ( -d $repo->path ) {
-      given ( $repo->type ) {
-        when ('git') { $fxn = '_git_status' }
-        ### FIXME      when( 'svn' ) { $fxn = 'svn_status' }
-        default {
-          $status = $self->error("ERROR: repo type '$_' not supported");
-        }
-      }
+      my $repo_type = $repo->type;
+      if ( $repo_type eq 'git' ) { $fxn = '_git_status' }
+      ### FIXME elsif( $repo_type eq 'svn' ) { $fxn = 'svn_status' }
+      else {  $status = $self->error("ERROR: repo type '$repo_type' not supported") }
 
       $status = $self->$fxn($repo) if ($fxn);
 
       next REPO if $self->quiet and !$status;
-    } elsif ( $repo->repo ) {
-      $status = 'Not checked out';
-    } else {
-      $status = $self->error("ERROR: repo '$label' does not exist");
     }
+    elsif ( $repo->repo ) { $status = 'Not checked out' }
+    else { $status = $self->error("ERROR: repo '$label' does not exist") }
 
     say "$msg$status";
   }
@@ -431,13 +426,11 @@ sub _update {
 
     my ( $status, $fxn );
 
-    given ( $repo->type ) {
-      when ('git') { $fxn = '_git_update' }
-      ### FIXME      when( 'svn' ) { $fxn = 'svn_update' }
-      default {
-        $status = $self->error("ERROR: repo type '$_' not supported");
-      }
-    }
+    my $repo_type = $repo->type;
+
+    if ( $repo_type eq 'git' ) { $fxn = '_git_update' }
+    ### FIXME elsif( $repo_type eq 'svn' ) { $fxn = 'svn_update' }
+    else { $status = $self->error("ERROR: repo type '$_' not supported") }
 
     $status = $self->$fxn($repo) if ($fxn);
 
@@ -464,7 +457,7 @@ App::GitGot::Command - Base class for App::GitGot commands
 
 =head1 VERSION
 
-version 1.07
+version 1.08
 
 =head1 METHODS
 

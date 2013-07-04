@@ -49,6 +49,7 @@ my %WriteMakefileArgs = (
     "YAML" => 0,
     "YAML::Any" => 0,
     "autodie" => 0,
+    "lib" => 0,
     "namespace::autoclean" => 0,
     "strict" => 0,
     "warnings" => 0
@@ -65,7 +66,7 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "parent" => 0
   },
-  "VERSION" => "1.07",
+  "VERSION" => "1.08",
   "test" => {
     "TESTS" => "t/*.t"
   }
