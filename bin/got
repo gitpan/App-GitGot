@@ -1,4 +1,4 @@
-#! /opt/perl/bin/perl
+#! /usr/bin/env perl
 # ABSTRACT: A tool to make it easier to manage multiple code repositories using different VCSen
 # PODNAME: got
 
@@ -22,7 +22,7 @@ got - A tool to make it easier to manage multiple code repositories using differ
 
 =head1 VERSION
 
-version 1.08
+version 1.09
 
 =head1 SYNOPSIS
 
@@ -133,6 +133,12 @@ Be more quiet
 Select all repositories that have the given tag. May be given multiple
 times. Multiple args are (effectively) 'and'-ed together.
 
+=item * C<--skip-tags / -T>
+
+Skip all repositories that have the given tag. May be given multiple
+times. Multiple args are (effectively) 'or'-ed together.  May be combined with
+-t to select all repos with the -t tag except for those with the -T tag.
+
 =item * C<--no-color / -C>
 
 Suppress colored output
@@ -204,6 +210,8 @@ Currently git is the only supported VCS.
 =over
 
 =item Yanick Champoux <yanick@babyl.dyndns.org>
+
+=item Michael Greb <michael@thegrebs.com>
 
 =back
 

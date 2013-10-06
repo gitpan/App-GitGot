@@ -1,6 +1,6 @@
 package App::GitGot::Repo::Git;
 {
-  $App::GitGot::Repo::Git::VERSION = '1.08';
+  $App::GitGot::Repo::Git::VERSION = '1.09';
 }
 BEGIN {
   $App::GitGot::Repo::Git::AUTHORITY = 'cpan:GENEHACK';
@@ -47,7 +47,7 @@ sub _build__wrapper {
     }
     $mock->mock( 'status' => sub { package MyFake;
 {
-  $MyFake::VERSION = '1.08';
+  $MyFake::VERSION = '1.09';
 }
 BEGIN {
   $MyFake::AUTHORITY = 'cpan:GENEHACK';
@@ -111,7 +111,7 @@ App::GitGot::Repo::Git - Git repo objects
 
 =head1 VERSION
 
-version 1.08
+version 1.09
 
 =head1 METHODS
 

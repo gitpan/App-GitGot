@@ -4,7 +4,7 @@ got - A tool to make it easier to manage multiple code repositories using differ
 
 # VERSION
 
-version 1.08
+version 1.09
 
 # SYNOPSIS
 
@@ -111,6 +111,12 @@ all the subcommands accept the following options:
     Select all repositories that have the given tag. May be given multiple
     times. Multiple args are (effectively) 'and'-ed together.
 
+- `--skip-tags / -T`
+
+    Skip all repositories that have the given tag. May be given multiple
+    times. Multiple args are (effectively) 'or'-ed together.  May be combined with
+    \-t to select all repos with the -t tag except for those with the -T tag.
+
 - `--no-color / -C`
 
     Suppress colored output
@@ -174,6 +180,7 @@ Currently git is the only supported VCS.
 # CONTRIBUTORS
 
 - Yanick Champoux <yanick@babyl.dyndns.org>
+- Michael Greb <michael@thegrebs.com>
 
 # AUTHOR
 

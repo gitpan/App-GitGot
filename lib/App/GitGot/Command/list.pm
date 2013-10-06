@@ -1,6 +1,6 @@
 package App::GitGot::Command::list;
 {
-  $App::GitGot::Command::list::VERSION = '1.08';
+  $App::GitGot::Command::list::VERSION = '1.09';
 }
 BEGIN {
   $App::GitGot::Command::list::AUTHORITY = 'cpan:GENEHACK';
@@ -50,7 +50,7 @@ App::GitGot::Command::list - list managed repositories
 
 =head1 VERSION
 
-version 1.08
+version 1.09
 
 =head1 AUTHOR
 

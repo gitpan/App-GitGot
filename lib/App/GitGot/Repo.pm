@@ -1,6 +1,6 @@
 package App::GitGot::Repo;
 {
-  $App::GitGot::Repo::VERSION = '1.08';
+  $App::GitGot::Repo::VERSION = '1.09';
 }
 BEGIN {
   $App::GitGot::Repo::AUTHORITY = 'cpan:GENEHACK';
@@ -110,7 +110,7 @@ App::GitGot::Repo - Base repository objects
 
 =head1 VERSION
 
-version 1.08
+version 1.09
 
 =head1 METHODS
 

@@ -57,8 +57,10 @@ my %WriteMakefileArgs = (
   "TEST_REQUIRES" => {
     "App::Cmd::Tester" => 0,
     "Carp" => 0,
-    "File::Find" => 0,
+    "File::Spec" => 0,
     "File::Temp" => 0,
+    "IO::Handle" => 0,
+    "IPC::Open3" => 0,
     "Test::Class" => 0,
     "Test::Class::Load" => 0,
     "Test::Exception" => 0,
@@ -66,7 +68,7 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "parent" => 0
   },
-  "VERSION" => "1.08",
+  "VERSION" => "1.09",
   "test" => {
     "TESTS" => "t/*.t"
   }
