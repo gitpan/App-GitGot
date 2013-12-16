@@ -1,6 +1,6 @@
 package App::GitGot::Command::add;
 {
-  $App::GitGot::Command::add::VERSION = '1.09';
+  $App::GitGot::Command::add::VERSION = '1.10';
 }
 BEGIN {
   $App::GitGot::Command::add::AUTHORITY = 'cpan:GENEHACK';
@@ -123,13 +123,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 App::GitGot::Command::add - add a new repo to your config
 
 =head1 VERSION
 
-version 1.09
+version 1.10
 
 =head1 AUTHOR
 

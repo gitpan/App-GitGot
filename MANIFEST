@@ -23,6 +23,7 @@ lib/App/GitGot/Command/mux.pm
 lib/App/GitGot/Command/push.pm
 lib/App/GitGot/Command/remove.pm
 lib/App/GitGot/Command/status.pm
+lib/App/GitGot/Command/that.pm
 lib/App/GitGot/Command/this.pm
 lib/App/GitGot/Command/update.pm
 lib/App/GitGot/Command/update_status.pm

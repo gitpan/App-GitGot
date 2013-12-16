@@ -1,6 +1,6 @@
 package App::GitGot::Outputter::dark;
 {
-  $App::GitGot::Outputter::dark::VERSION = '1.09';
+  $App::GitGot::Outputter::dark::VERSION = '1.10';
 }
 BEGIN {
   $App::GitGot::Outputter::dark::AUTHORITY = 'cpan:GENEHACK';
@@ -42,13 +42,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 App::GitGot::Outputter::dark - Color scheme appropriate for dark terminal backgrounds
 
 =head1 VERSION
 
-version 1.09
+version 1.10
 
 =head1 AUTHOR
 

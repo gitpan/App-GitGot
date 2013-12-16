@@ -1,6 +1,6 @@
 package App::GitGot::Repo::Git;
 {
-  $App::GitGot::Repo::Git::VERSION = '1.09';
+  $App::GitGot::Repo::Git::VERSION = '1.10';
 }
 BEGIN {
   $App::GitGot::Repo::Git::AUTHORITY = 'cpan:GENEHACK';
@@ -47,7 +47,7 @@ sub _build__wrapper {
     }
     $mock->mock( 'status' => sub { package MyFake;
 {
-  $MyFake::VERSION = '1.09';
+  $MyFake::VERSION = '1.10';
 }
 BEGIN {
   $MyFake::AUTHORITY = 'cpan:GENEHACK';
@@ -58,7 +58,7 @@ BEGIN {
   }
   else {
     return Git::Wrapper->new( $self->path )
-      or die "Can't make Git::Wrapper";
+      || die "Can't make Git::Wrapper";
   }
 }
 
@@ -105,13 +105,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 App::GitGot::Repo::Git - Git repo objects
 
 =head1 VERSION
 
-version 1.09
+version 1.10
 
 =head1 METHODS
 

@@ -1,6 +1,6 @@
 package App::GitGot::Command::move;
 {
-  $App::GitGot::Command::move::VERSION = '1.09';
+  $App::GitGot::Command::move::VERSION = '1.10';
 }
 BEGIN {
   $App::GitGot::Command::move::AUTHORITY = 'cpan:GENEHACK';
@@ -65,13 +65,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 App::GitGot::Command::move - move a repo in a new directory
 
 =head1 VERSION
 
-version 1.09
+version 1.10
 
 =head1 AUTHOR
 

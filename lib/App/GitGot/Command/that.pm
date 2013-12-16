@@ -1,24 +1,22 @@
-package App::GitGot::Command::this;
+package App::GitGot::Command::that;
 {
-  $App::GitGot::Command::this::VERSION = '1.10';
+  $App::GitGot::Command::that::VERSION = '1.10';
 }
 BEGIN {
-  $App::GitGot::Command::this::AUTHORITY = 'cpan:GENEHACK';
+  $App::GitGot::Command::that::AUTHORITY = 'cpan:GENEHACK';
 }
-# ABSTRACT: check if the current repository is managed
+# ABSTRACT: check if a given repository is managed
 
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
 
-use Cwd;
-
-sub command_names { qw/ this / }
+sub command_names { qw/ that / }
 
 sub _execute {
   my( $self, $opt, $args ) = @_;
-
-  $self->_path_is_managed( getcwd() ) or exit 1;
+  my $path = pop @$args;
+  $self->_path_is_managed( $path ) or exit 1;
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -32,7 +30,7 @@ __END__
 
 =head1 NAME
 
-App::GitGot::Command::this - check if the current repository is managed
+App::GitGot::Command::that - check if a given repository is managed
 
 =head1 VERSION
 

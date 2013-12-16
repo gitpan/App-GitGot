@@ -16,13 +16,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 got - A tool to make it easier to manage multiple code repositories using different VCSen
 
 =head1 VERSION
 
-version 1.09
+version 1.10
 
 =head1 SYNOPSIS
 
@@ -110,8 +112,6 @@ date, pending changes, dirty, etc.) and sync it with any upstream master.
 
 got also supports forking a GitHub repo and adding it to the list of managed
 repositories.
-
-=encoding UTF-8
 
 =head1 OPTIONS
 
@@ -212,6 +212,8 @@ Currently git is the only supported VCS.
 =item Yanick Champoux <yanick@babyl.dyndns.org>
 
 =item Michael Greb <michael@thegrebs.com>
+
+=item Chris Prather <chris@prather.org>
 
 =back
 

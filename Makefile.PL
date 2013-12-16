@@ -68,37 +68,62 @@ my %WriteMakefileArgs = (
     "Test::More" => 0,
     "parent" => 0
   },
-  "VERSION" => "1.09",
+  "VERSION" => "1.10",
   "test" => {
     "TESTS" => "t/*.t"
   }
 );
 
 
-unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
-  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
-  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
-  for my $mod ( keys %$tr ) {
-    if ( exists $br->{$mod} ) {
-      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
-    }
-    else {
-      $br->{$mod} = $tr->{$mod};
-    }
-  }
-}
+my %FallbackPrereqs = (
+  "App::Cmd::Tester" => 0,
+  "Carp" => 0,
+  "Config::INI::Reader" => 0,
+  "Cwd" => 0,
+  "Data::Dumper" => 0,
+  "File::Basename" => 0,
+  "File::Copy::Recursive" => 0,
+  "File::Path" => "2.08",
+  "File::Slurp" => 0,
+  "File::Spec" => 0,
+  "File::Temp" => 0,
+  "FindBin" => 0,
+  "Git::Wrapper" => "0.014",
+  "IO::Handle" => 0,
+  "IPC::Open3" => 0,
+  "List::MoreUtils" => 0,
+  "List::Util" => 0,
+  "Mouse" => 0,
+  "MouseX::App::Cmd" => 0,
+  "MouseX::App::Cmd::Command" => 0,
+  "MouseX::NativeTraits" => 0,
+  "Net::GitHub" => 0,
+  "Path::Class" => 0,
+  "Term::ANSIColor" => 0,
+  "Term::ReadLine" => 0,
+  "Term::ReadLine::Perl" => 0,
+  "Test::Class" => 0,
+  "Test::Class::Load" => 0,
+  "Test::Exception" => 0,
+  "Test::File" => 0,
+  "Test::MockObject" => 0,
+  "Test::More" => 0,
+  "Try::Tiny" => 0,
+  "YAML" => 0,
+  "YAML::Any" => 0,
+  "autodie" => 0,
+  "lib" => 0,
+  "namespace::autoclean" => 0,
+  "parent" => 0,
+  "strict" => 0,
+  "warnings" => 0
+);
 
-unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
-  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
-  my $pp = $WriteMakefileArgs{PREREQ_PM};
-  for my $mod ( keys %$br ) {
-    if ( exists $pp->{$mod} ) {
-      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
-    }
-    else {
-      $pp->{$mod} = $br->{$mod};
-    }
-  }
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  delete $WriteMakefileArgs{TEST_REQUIRES};
+  delete $WriteMakefileArgs{BUILD_REQUIRES};
+  $WriteMakefileArgs{PREREQ_PM} = \%FallbackPrereqs;
 }
 
 delete $WriteMakefileArgs{CONFIGURE_REQUIRES}

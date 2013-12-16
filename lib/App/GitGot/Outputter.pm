@@ -1,6 +1,6 @@
 package App::GitGot::Outputter;
 {
-  $App::GitGot::Outputter::VERSION = '1.09';
+  $App::GitGot::Outputter::VERSION = '1.10';
 }
 BEGIN {
   $App::GitGot::Outputter::AUTHORITY = 'cpan:GENEHACK';
@@ -53,13 +53,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 App::GitGot::Outputter - Generic base class for outputting formatted messages.
 
 =head1 VERSION
 
-version 1.09
+version 1.10
 
 =head1 METHODS
 
