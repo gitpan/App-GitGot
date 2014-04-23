@@ -1,6 +1,6 @@
 package App::GitGot::Command::add;
 # ABSTRACT: add a new repo to your config
-$App::GitGot::Command::add::VERSION = '1.11';
+$App::GitGot::Command::add::VERSION = '1.12';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -125,7 +125,7 @@ App::GitGot::Command::add - add a new repo to your config
 
 =head1 VERSION
 
-version 1.11
+version 1.12
 
 =head1 AUTHOR
 

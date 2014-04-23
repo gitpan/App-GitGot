@@ -1,6 +1,6 @@
 package App::GitGot::Command::push;
 # ABSTRACT: Push local changes to the default remote in git repos
-$App::GitGot::Command::push::VERSION = '1.11';
+$App::GitGot::Command::push::VERSION = '1.12';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -54,7 +54,7 @@ App::GitGot::Command::push - Push local changes to the default remote in git rep
 
 =head1 VERSION
 
-version 1.11
+version 1.12
 
 =head1 AUTHOR
 

@@ -1,5 +1,5 @@
 package App::GitGot::Repo::Git;
-$App::GitGot::Repo::Git::VERSION = '1.11';
+$App::GitGot::Repo::Git::VERSION = '1.12';
 # ABSTRACT: Git repo objects
 use Mouse;
 extends 'App::GitGot::Repo';
@@ -38,12 +38,13 @@ sub _build__wrapper {
     my $mock = Test::MockObject->new;
     $mock->set_isa( 'Git::Wrapper' );
     foreach my $method ( qw/ cherry clone fetch gc pull
-                             remote symbolic_ref ERR / ) {
+                             remote symbolic_ref / ) {
       $mock->mock( $method => sub { return( '1' )});
     }
     $mock->mock( 'status' => sub { package MyFake;
-$MyFake::VERSION = '1.11'; sub get { return () }; return bless {} , 'MyFake' } );
+$MyFake::VERSION = '1.12'; sub get { return () }; return bless {} , 'MyFake' } );
     $mock->mock( 'config' => sub { 0 });
+    $mock->mock( 'ERR'    => sub { [ ] });
 
     return $mock
   }
@@ -104,7 +105,7 @@ App::GitGot::Repo::Git - Git repo objects
 
 =head1 VERSION
 
-version 1.11
+version 1.12
 
 =head1 METHODS
 

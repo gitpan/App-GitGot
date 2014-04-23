@@ -1,6 +1,6 @@
 package App::GitGot::Command;
 # ABSTRACT: Base class for App::GitGot commands
-$App::GitGot::Command::VERSION = '1.11';
+$App::GitGot::Command::VERSION = '1.12';
 use Mouse;
 extends 'MouseX::App::Cmd::Command';
 use 5.010;
@@ -589,7 +589,7 @@ App::GitGot::Command - Base class for App::GitGot commands
 
 =head1 VERSION
 
-version 1.11
+version 1.12
 
 =head1 METHODS
 

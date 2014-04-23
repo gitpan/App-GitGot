@@ -1,6 +1,6 @@
 package App::GitGot::Command::version;
 # ABSTRACT: display application version
-$App::GitGot::Command::version::VERSION = '1.11';
+$App::GitGot::Command::version::VERSION = '1.12';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -22,7 +22,7 @@ App::GitGot::Command::version - display application version
 
 =head1 VERSION
 
-version 1.11
+version 1.12
 
 =head1 AUTHOR
 

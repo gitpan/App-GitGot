@@ -1,6 +1,6 @@
 package App::GitGot::Command::chdir;
 # ABSTRACT: open a subshell in a selected project
-$App::GitGot::Command::chdir::VERSION = '1.11';
+$App::GitGot::Command::chdir::VERSION = '1.12';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -38,7 +38,7 @@ App::GitGot::Command::chdir - open a subshell in a selected project
 
 =head1 VERSION
 
-version 1.11
+version 1.12
 
 =head1 AUTHOR
 
