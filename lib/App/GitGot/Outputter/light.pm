@@ -1,12 +1,6 @@
 package App::GitGot::Outputter::light;
-{
-  $App::GitGot::Outputter::light::VERSION = '1.10';
-}
-BEGIN {
-  $App::GitGot::Outputter::light::AUTHORITY = 'cpan:GENEHACK';
-}
 # ABSTRACT: Color scheme appropriate for dark terminal backgrounds
-
+$App::GitGot::Outputter::light::VERSION = '1.11';
 use Mouse;
 extends 'App::GitGot::Outputter';
 use 5.010;
@@ -53,7 +47,7 @@ App::GitGot::Outputter::light - Color scheme appropriate for dark terminal backg
 
 =head1 VERSION
 
-version 1.10
+version 1.11
 
 =head1 AUTHOR
 
@@ -61,7 +55,7 @@ John SJ Anderson <genehack@genehack.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by John SJ Anderson.
+This software is copyright (c) 2014 by John SJ Anderson.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

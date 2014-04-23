@@ -1,12 +1,6 @@
 package App::GitGot::Outputter;
-{
-  $App::GitGot::Outputter::VERSION = '1.10';
-}
-BEGIN {
-  $App::GitGot::Outputter::AUTHORITY = 'cpan:GENEHACK';
-}
 # ABSTRACT: Generic base class for outputting formatted messages.
-
+$App::GitGot::Outputter::VERSION = '1.11';
 use Mouse;
 use 5.010;
 
@@ -61,7 +55,7 @@ App::GitGot::Outputter - Generic base class for outputting formatted messages.
 
 =head1 VERSION
 
-version 1.10
+version 1.11
 
 =head1 METHODS
 
@@ -87,7 +81,7 @@ John SJ Anderson <genehack@genehack.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by John SJ Anderson.
+This software is copyright (c) 2014 by John SJ Anderson.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

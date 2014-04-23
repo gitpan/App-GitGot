@@ -1,10 +1,5 @@
 package App::GitGot::Repo::Git;
-{
-  $App::GitGot::Repo::Git::VERSION = '1.10';
-}
-BEGIN {
-  $App::GitGot::Repo::Git::AUTHORITY = 'cpan:GENEHACK';
-}
+$App::GitGot::Repo::Git::VERSION = '1.11';
 # ABSTRACT: Git repo objects
 use Mouse;
 extends 'App::GitGot::Repo';
@@ -25,6 +20,7 @@ has '_wrapper' => (
                       cherry
                       clone
                       config
+                      fetch
                       gc
                       pull
                       push
@@ -41,17 +37,12 @@ sub _build__wrapper {
   if ( $ENV{GITGOT_FAKE_GIT_WRAPPER} ) {
     my $mock = Test::MockObject->new;
     $mock->set_isa( 'Git::Wrapper' );
-    foreach my $method ( qw/ cherry clone gc pull
-                             remote symbolic_ref / ) {
+    foreach my $method ( qw/ cherry clone fetch gc pull
+                             remote symbolic_ref ERR / ) {
       $mock->mock( $method => sub { return( '1' )});
     }
     $mock->mock( 'status' => sub { package MyFake;
-{
-  $MyFake::VERSION = '1.10';
-}
-BEGIN {
-  $MyFake::AUTHORITY = 'cpan:GENEHACK';
-} sub get { return () }; return bless {} , 'MyFake' } );
+$MyFake::VERSION = '1.11'; sub get { return () }; return bless {} , 'MyFake' } );
     $mock->mock( 'config' => sub { 0 });
 
     return $mock
@@ -113,7 +104,7 @@ App::GitGot::Repo::Git - Git repo objects
 
 =head1 VERSION
 
-version 1.10
+version 1.11
 
 =head1 METHODS
 
@@ -133,7 +124,7 @@ John SJ Anderson <genehack@genehack.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by John SJ Anderson.
+This software is copyright (c) 2014 by John SJ Anderson.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

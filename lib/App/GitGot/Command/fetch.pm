@@ -1,9 +1,17 @@
-package App::GitGot;
-$App::GitGot::VERSION = '1.11';
+package App::GitGot::Command::fetch;
+# ABSTRACT: fetch remotes for managed repositories
+$App::GitGot::Command::fetch::VERSION = '1.11';
 use Mouse;
-extends 'MouseX::App::Cmd';
-# ABSTRACT: A tool to make it easier to manage multiple git repositories.
+extends 'App::GitGot::Command';
+use 5.010;
 
+sub command_names { qw/ fetch / }
+
+sub _execute {
+  my ( $self, $opt, $args ) = @_;
+
+  $self->_fetch( $self->active_repos );
+}
 
 __PACKAGE__->meta->make_immutable;
 1;
@@ -16,15 +24,11 @@ __END__
 
 =head1 NAME
 
-App::GitGot - A tool to make it easier to manage multiple git repositories.
+App::GitGot::Command::fetch - fetch remotes for managed repositories
 
 =head1 VERSION
 
 version 1.11
-
-=head1 SYNOPSIS
-
-See C<perldoc got> for usage information.
 
 =head1 AUTHOR
 

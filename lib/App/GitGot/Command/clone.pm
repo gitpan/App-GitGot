@@ -1,12 +1,6 @@
 package App::GitGot::Command::clone;
-{
-  $App::GitGot::Command::clone::VERSION = '1.10';
-}
-BEGIN {
-  $App::GitGot::Command::clone::AUTHORITY = 'cpan:GENEHACK';
-}
 # ABSTRACT: clone a remote repo and add it to your config
-
+$App::GitGot::Command::clone::VERSION = '1.11';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -78,7 +72,7 @@ App::GitGot::Command::clone - clone a remote repo and add it to your config
 
 =head1 VERSION
 
-version 1.10
+version 1.11
 
 =head1 AUTHOR
 
@@ -86,7 +80,7 @@ John SJ Anderson <genehack@genehack.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by John SJ Anderson.
+This software is copyright (c) 2014 by John SJ Anderson.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
