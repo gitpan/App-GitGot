@@ -1,6 +1,6 @@
 package App::GitGot::Command::status;
 # ABSTRACT: print status info about repos
-$App::GitGot::Command::status::VERSION = '1.12';
+$App::GitGot::Command::status::VERSION = '1.13';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -28,7 +28,7 @@ App::GitGot::Command::status - print status info about repos
 
 =head1 VERSION
 
-version 1.12
+version 1.13
 
 =head1 AUTHOR
 

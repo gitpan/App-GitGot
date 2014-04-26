@@ -59,7 +59,7 @@ resources:
   bugtracker: https://github.com/genehack/app-gitgot/issues
   homepage: http://genehack.github.com/app-gitgot/
   repository: https://github.com/genehack/app-gitgot.git
-version: '1.12'
+version: '1.13'
 x_Dist_Zilla:
   perl:
     version: '5.018001'
@@ -259,7 +259,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
       name: ReadmePodInRoot
-      version: '0.133360'
+      version: '0.141120'
     -
       class: Dist::Zilla::Plugin::CopyFilesFromBuild
       name: CopyFilesFromBuild
@@ -270,7 +270,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v1.12
+          tag: v1.13
           tag_format: v%v
           tag_message: v%v
           time_zone: local
