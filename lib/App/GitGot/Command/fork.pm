@@ -1,6 +1,6 @@
 package App::GitGot::Command::fork;
 # ABSTRACT: fork a github repo
-$App::GitGot::Command::fork::VERSION = '1.14';
+$App::GitGot::Command::fork::VERSION = '1.15';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -52,7 +52,13 @@ sub _parse_github_identity {
 
   my @lines = read_lines( $file );
 
-  my %config = map { my( @x ) = split /\s/; { $x[0] => $x[1] } } @lines;
+  my %config;
+  foreach ( @lines ) {
+    chomp;
+    next unless $_;
+    my( $k , $v ) = split /\s/;
+    $config{$k} = $v;
+  }
 
   if ( defined $config{access_token} ) {
     return ( access_token => $config{access_token} )
@@ -90,7 +96,7 @@ App::GitGot::Command::fork - fork a github repo
 
 =head1 VERSION
 
-version 1.14
+version 1.15
 
 =head1 AUTHOR
 

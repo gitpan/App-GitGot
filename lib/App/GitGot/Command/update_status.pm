@@ -1,6 +1,6 @@
 package App::GitGot::Command::update_status;
 # ABSTRACT: update managed repositories then display their status
-$App::GitGot::Command::update_status::VERSION = '1.14';
+$App::GitGot::Command::update_status::VERSION = '1.15';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -32,7 +32,7 @@ App::GitGot::Command::update_status - update managed repositories then display t
 
 =head1 VERSION
 
-version 1.14
+version 1.15
 
 =head1 AUTHOR
 

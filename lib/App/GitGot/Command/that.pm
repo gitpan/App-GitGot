@@ -1,6 +1,6 @@
 package App::GitGot::Command::that;
 # ABSTRACT: check if a given repository is managed
-$App::GitGot::Command::that::VERSION = '1.14';
+$App::GitGot::Command::that::VERSION = '1.15';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -28,7 +28,7 @@ App::GitGot::Command::that - check if a given repository is managed
 
 =head1 VERSION
 
-version 1.14
+version 1.15
 
 =head1 AUTHOR
 
