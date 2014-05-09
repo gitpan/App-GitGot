@@ -1,6 +1,6 @@
 package App::GitGot::Command::move;
 # ABSTRACT: move a repo in a new directory
-$App::GitGot::Command::move::VERSION = '1.13';
+$App::GitGot::Command::move::VERSION = '1.14';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -67,7 +67,7 @@ App::GitGot::Command::move - move a repo in a new directory
 
 =head1 VERSION
 
-version 1.13
+version 1.14
 
 =head1 AUTHOR
 

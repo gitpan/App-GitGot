@@ -1,6 +1,6 @@
 package App::GitGot::Command::fork;
 # ABSTRACT: fork a github repo
-$App::GitGot::Command::fork::VERSION = '1.13';
+$App::GitGot::Command::fork::VERSION = '1.14';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -8,7 +8,7 @@ use 5.010;
 use autodie;
 use App::GitGot::Repo::Git;
 use Cwd;
-use File::Slurp;
+use File::Slurp::Tiny 'read_lines';
 use Net::GitHub;
 
 has 'noclone' => (
@@ -50,7 +50,7 @@ sub _parse_github_identity {
   -e $file or
     say STDERR "ERROR: Can't find $ENV{HOME}/.github-identity" and exit(1);
 
-  my @lines = read_file( $file );
+  my @lines = read_lines( $file );
 
   my %config = map { my( @x ) = split /\s/; { $x[0] => $x[1] } } @lines;
 
@@ -90,7 +90,7 @@ App::GitGot::Command::fork - fork a github repo
 
 =head1 VERSION
 
-version 1.13
+version 1.14
 
 =head1 AUTHOR
 
