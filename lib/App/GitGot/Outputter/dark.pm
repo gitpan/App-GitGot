@@ -1,6 +1,6 @@
 package App::GitGot::Outputter::dark;
 # ABSTRACT: Color scheme appropriate for dark terminal backgrounds
-$App::GitGot::Outputter::dark::VERSION = '1.15';
+$App::GitGot::Outputter::dark::VERSION = '1.16';
 use Mouse;
 extends 'App::GitGot::Outputter';
 use 5.010;
@@ -44,7 +44,7 @@ App::GitGot::Outputter::dark - Color scheme appropriate for dark terminal backgr
 
 =head1 VERSION
 
-version 1.15
+version 1.16
 
 =head1 AUTHOR
 

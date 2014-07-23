@@ -1,5 +1,5 @@
 package App::GitGot::Repo;
-$App::GitGot::Repo::VERSION = '1.15';
+$App::GitGot::Repo::VERSION = '1.16';
 # ABSTRACT: Base repository objects
 use Mouse;
 use 5.010;
@@ -107,7 +107,7 @@ App::GitGot::Repo - Base repository objects
 
 =head1 VERSION
 
-version 1.15
+version 1.16
 
 =head1 METHODS
 

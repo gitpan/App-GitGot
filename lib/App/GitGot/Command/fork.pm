@@ -1,15 +1,15 @@
 package App::GitGot::Command::fork;
 # ABSTRACT: fork a github repo
-$App::GitGot::Command::fork::VERSION = '1.15';
+$App::GitGot::Command::fork::VERSION = '1.16';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
 
 use autodie;
 use App::GitGot::Repo::Git;
+use Class::Load       'try_load_class';
 use Cwd;
 use File::Slurp::Tiny 'read_lines';
-use Net::GitHub;
 
 has 'noclone' => (
   is          => 'rw',
@@ -20,6 +20,10 @@ has 'noclone' => (
 
 sub _execute {
   my( $self, $opt, $args ) = @_;
+
+  try_load_class('Net::GitHub') or
+    say "Sorry, Net::GitHub is required for 'got fork'. Please install it."
+    and exit(1);
 
   my $github_url = shift @$args
     or say STDERR "ERROR: Need the URL of a repo to fork!" and exit(1);
@@ -96,7 +100,7 @@ App::GitGot::Command::fork - fork a github repo
 
 =head1 VERSION
 
-version 1.15
+version 1.16
 
 =head1 AUTHOR
 

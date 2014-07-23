@@ -1,6 +1,6 @@
 package App::GitGot::Command;
 # ABSTRACT: Base class for App::GitGot commands
-$App::GitGot::Command::VERSION = '1.15';
+$App::GitGot::Command::VERSION = '1.16';
 use Mouse;
 extends 'MouseX::App::Cmd::Command';
 use 5.010;
@@ -534,6 +534,8 @@ sub _fetch {
 sub _path_is_managed {
   my( $self , $path ) = @_;
 
+  return unless $path;
+
   my $dir = dir( $path );
 
   # find repo root
@@ -589,7 +591,7 @@ App::GitGot::Command - Base class for App::GitGot commands
 
 =head1 VERSION
 
-version 1.15
+version 1.16
 
 =head1 METHODS
 
