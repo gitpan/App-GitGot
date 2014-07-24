@@ -1,6 +1,6 @@
 package App::GitGot::Command::this;
 # ABSTRACT: check if the current repository is managed
-$App::GitGot::Command::this::VERSION = '1.16';
+$App::GitGot::Command::this::VERSION = '1.17';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -30,7 +30,7 @@ App::GitGot::Command::this - check if the current repository is managed
 
 =head1 VERSION
 
-version 1.16
+version 1.17
 
 =head1 AUTHOR
 

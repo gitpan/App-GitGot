@@ -1,6 +1,6 @@
 package App::GitGot::Command::mux;
 # ABSTRACT: open a tmux window for a selected project
-$App::GitGot::Command::mux::VERSION = '1.16';
+$App::GitGot::Command::mux::VERSION = '1.17';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -66,7 +66,7 @@ App::GitGot::Command::mux - open a tmux window for a selected project
 
 =head1 VERSION
 
-version 1.16
+version 1.17
 
 =head1 AUTHOR
 

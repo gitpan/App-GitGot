@@ -59,7 +59,7 @@ resources:
   bugtracker: https://github.com/genehack/app-gitgot/issues
   homepage: http://genehack.github.com/app-gitgot/
   repository: https://github.com/genehack/app-gitgot.git
-version: '1.16'
+version: '1.17'
 x_Dist_Zilla:
   perl:
     version: '5.020000'
@@ -278,7 +278,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: 0
-          tag: v1.16
+          tag: v1.17
           tag_format: v%v
           tag_message: v%v
           time_zone: local

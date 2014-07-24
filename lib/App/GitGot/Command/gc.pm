@@ -1,6 +1,6 @@
 package App::GitGot::Command::gc;
 # ABSTRACT: Run the 'gc' command to garbage collect in git repos
-$App::GitGot::Command::gc::VERSION = '1.16';
+$App::GitGot::Command::gc::VERSION = '1.17';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -47,7 +47,7 @@ App::GitGot::Command::gc - Run the 'gc' command to garbage collect in git repos
 
 =head1 VERSION
 
-version 1.16
+version 1.17
 
 =head1 AUTHOR
 

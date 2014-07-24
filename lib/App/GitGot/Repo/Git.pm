@@ -1,5 +1,5 @@
 package App::GitGot::Repo::Git;
-$App::GitGot::Repo::Git::VERSION = '1.16';
+$App::GitGot::Repo::Git::VERSION = '1.17';
 # ABSTRACT: Git repo objects
 use Mouse;
 extends 'App::GitGot::Repo';
@@ -105,7 +105,7 @@ App::GitGot::Repo::Git - Git repo objects
 
 =head1 VERSION
 
-version 1.16
+version 1.17
 
 =head1 METHODS
 

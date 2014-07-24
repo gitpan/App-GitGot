@@ -1,6 +1,6 @@
 package App::GitGot::Command::update;
 # ABSTRACT: update managed repositories
-$App::GitGot::Command::update::VERSION = '1.16';
+$App::GitGot::Command::update::VERSION = '1.17';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -28,7 +28,7 @@ App::GitGot::Command::update - update managed repositories
 
 =head1 VERSION
 
-version 1.16
+version 1.17
 
 =head1 AUTHOR
 

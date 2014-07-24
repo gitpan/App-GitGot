@@ -1,6 +1,6 @@
 package App::GitGot::Command::remove;
 # ABSTRACT: remove a managed repository from your config
-$App::GitGot::Command::remove::VERSION = '1.16';
+$App::GitGot::Command::remove::VERSION = '1.17';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -58,7 +58,7 @@ App::GitGot::Command::remove - remove a managed repository from your config
 
 =head1 VERSION
 
-version 1.16
+version 1.17
 
 =head1 AUTHOR
 
