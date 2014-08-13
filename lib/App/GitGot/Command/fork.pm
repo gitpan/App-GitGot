@@ -1,6 +1,6 @@
 package App::GitGot::Command::fork;
 # ABSTRACT: fork a github repo
-$App::GitGot::Command::fork::VERSION = '1.17';
+$App::GitGot::Command::fork::VERSION = '1.18';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -100,7 +100,7 @@ App::GitGot::Command::fork - fork a github repo
 
 =head1 VERSION
 
-version 1.17
+version 1.18
 
 =head1 AUTHOR
 

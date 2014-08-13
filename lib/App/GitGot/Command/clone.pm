@@ -1,6 +1,6 @@
 package App::GitGot::Command::clone;
 # ABSTRACT: clone a remote repo and add it to your config
-$App::GitGot::Command::clone::VERSION = '1.17';
+$App::GitGot::Command::clone::VERSION = '1.18';
 use Mouse;
 extends 'App::GitGot::Command';
 use 5.010;
@@ -72,7 +72,7 @@ App::GitGot::Command::clone - clone a remote repo and add it to your config
 
 =head1 VERSION
 
-version 1.17
+version 1.18
 
 =head1 AUTHOR
 

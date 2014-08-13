@@ -1,6 +1,6 @@
 package App::GitGot::Outputter;
 # ABSTRACT: Generic base class for outputting formatted messages.
-$App::GitGot::Outputter::VERSION = '1.17';
+$App::GitGot::Outputter::VERSION = '1.18';
 use Mouse;
 use 5.010;
 
@@ -55,7 +55,7 @@ App::GitGot::Outputter - Generic base class for outputting formatted messages.
 
 =head1 VERSION
 
-version 1.17
+version 1.18
 
 =head1 METHODS
 
