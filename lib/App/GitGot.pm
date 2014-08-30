@@ -1,5 +1,5 @@
 package App::GitGot;
-$App::GitGot::VERSION = '1.18';
+$App::GitGot::VERSION = '1.19';
 use Mouse;
 extends 'MouseX::App::Cmd';
 # ABSTRACT: A tool to make it easier to manage multiple git repositories.
@@ -20,7 +20,7 @@ App::GitGot - A tool to make it easier to manage multiple git repositories.
 
 =head1 VERSION
 
-version 1.18
+version 1.19
 
 =head1 SYNOPSIS
 
